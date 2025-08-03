@@ -1,0 +1,2496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Enhanced LMS - The Future of Corporate Learning</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            background: #ffffff;
+        }
+
+        /* Header - Docebo Style */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 1000;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #ff6b35;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .header-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #ff6b35;
+            color: white;
+            border: 2px solid #ff6b35;
+        }
+
+        .btn-primary:hover {
+            background: #e55a2b;
+            border-color: #e55a2b;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #374151;
+            border: 2px solid #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            border-color: #ff6b35;
+            color: #ff6b35;
+        }
+
+        .btn-large {
+            padding: 18px 36px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* Hero Section - Optimized Layout */
+        .hero {
+            padding: 140px 0 100px;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(135deg, #fff5f2 0%, #fef3f0 100%);
+            z-index: 1;
+            border-radius: 0 0 0 100px;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-content .highlight {
+            color: #ff6b35;
+            position: relative;
+        }
+
+        .hero-content .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b35, #f7931e);
+            border-radius: 2px;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 400;
+            max-width: 90%;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 2rem 0;
+            border-top: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+            margin-top: 1rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 107, 53, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 107, 53, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ff6b35;
+            display: block;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        .hero-visual {
+            position: relative;
+            z-index: 3;
+        }
+
+        .platform-preview {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .platform-preview:hover {
+            transform: perspective(1000px) rotateY(-2deg) rotateX(2deg);
+        }
+
+        .preview-header {
+            background: #f9fafb;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .preview-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .preview-dot.red { background: #ef4444; }
+        .preview-dot.yellow { background: #f59e0b; }
+        .preview-dot.green { background: #10b981; }
+
+        .preview-content {
+            padding: 2rem;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Features Section - Optimized Layout */
+        .features {
+            padding: 120px 0;
+            background: #f8fafc;
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-eyebrow {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #ff6b35;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-eyebrow::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #ff6b35;
+            border-radius: 1px;
+        }
+
+        .section-title {
+            font-size: 2.75rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b35, #f7931e);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #ff6b35;
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.15);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            margin: 0 auto 2rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: #6b7280;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* AI Showcase Section */
+        .ai-showcase {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: white;
+        }
+
+        .ai-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .ai-demo {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .chat-interface {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .chat-message {
+            background: rgba(102, 126, 234, 0.2);
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border-left: 3px solid #667eea;
+        }
+
+
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #2d3748;
+            padding-top: 1rem;
+            text-align: center;
+            color: #718096;
+        }
+
+        /* Responsive Design - Mobile First */
+        @media (max-width: 1024px) {
+            .performance-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 120px 0 60px;
+                min-height: auto;
+            }
+
+            .hero::before {
+                width: 100%;
+                height: 50%;
+                border-radius: 0 0 50px 50px;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+                max-width: 100%;
+            }
+
+            .hero-cta {
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-top: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2.25rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .course-track {
+                animation: autoScroll 20s linear infinite;
+            }
+
+            .course-slide {
+                min-width: 280px;
+                max-width: 280px;
+                padding: 1.25rem;
+            }
+
+            .ai-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .btn-large {
+                padding: 14px 24px;
+                font-size: 16px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .section-header {
+                margin-bottom: 3rem;
+            }
+
+            .performance-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Enhanced Animations & Micro-interactions */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Floating Elements */
+        .floating {
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(1deg); }
+            50% { transform: translateY(-20px) rotate(0deg); }
+            75% { transform: translateY(-10px) rotate(-1deg); }
+        }
+
+        /* Pulse Animation for CTAs */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 107, 53, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
+        }
+
+        .btn-primary:hover {
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Focus states for accessibility */
+        .btn:focus,
+        .tab-btn:focus {
+            outline: 2px solid #ff6b35;
+            outline-offset: 2px;
+        }
+
+        /* Chatbot Widget Styles */
+        .chatbot-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chatbot-button {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(255, 107, 53, 0.6);
+        }
+
+        .chatbot-button.active {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+
+        .chatbot-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+
+        .chatbot-panel.open {
+            display: flex;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .chatbot-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatbot-body {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chatbot-messages {
+            flex-grow: 1;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding-right: 5px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 2px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-thumb {
+            background: #ff6b35;
+            border-radius: 2px;
+        }
+
+        .chat-message {
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            max-width: 85%;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .chat-message.bot {
+            background: #f3f4f6;
+            margin-right: auto;
+            color: #374151;
+        }
+
+        .chat-message.user {
+            background: #ff6b35;
+            color: white;
+            margin-left: auto;
+        }
+
+        .chatbot-input {
+            display: flex;
+            gap: 8px;
+        }
+
+        .chatbot-input input {
+            flex-grow: 1;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            outline: none;
+            font-size: 0.9em;
+        }
+
+        .chatbot-input input:focus {
+            border-color: #ff6b35;
+        }
+
+        .chatbot-send {
+            width: 36px;
+            height: 36px;
+            background: #ff6b35;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .chatbot-send:hover {
+            background: #e55a2b;
+        }
+
+        /* Course Catalog Auto-Scroll */
+        .course-catalog {
+            padding: 120px 0;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .course-catalog::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+
+        .course-slider {
+            position: relative;
+            overflow: hidden;
+            margin-top: 3rem;
+            height: 400px;
+        }
+
+        .course-track {
+            display: flex;
+            gap: 2rem;
+            animation: autoScroll 30s linear infinite;
+            width: calc(300px * 12); /* Double the courses for seamless loop */
+        }
+
+        .course-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes autoScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-300px * 6 - 12rem)); /* Move by 6 courses + gaps */
+            }
+        }
+
+        .course-slide {
+            min-width: 300px;
+            max-width: 300px;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .course-slide:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.1);
+            border-color: #ff6b35;
+        }
+
+        .course-category {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .course-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-description {
+            color: #6b7280;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .course-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .course-level {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .level-beginner {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .level-intermediate {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .level-advanced {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .course-cta {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .course-cta:hover {
+            background: #e55a2b;
+        }
+
+        .auto-scroll-indicator {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .scroll-pause-hint {
+            background: #f3f4f6;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.8rem;
+            color: #374151;
+        }
+
+        /* Performance & Analytics Section */
+        .performance-section {
+            padding: 120px 0;
+            background: #f8fafc;
+            position: relative;
+        }
+
+        .performance-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+
+        .performance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .performance-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .performance-card:hover {
+            border-color: #ff6b35;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.1);
+        }
+
+        .performance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .performance-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .performance-tabs {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: #ff6b35;
+            color: white;
+            border-color: #ff6b35;
+        }
+
+        .tab-btn:hover {
+            border-color: #ff6b35;
+        }
+
+        .performer-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .performer-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .performer-item:last-child {
+            border-bottom: none;
+        }
+
+        .performer-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .performer-rank {
+            width: 24px;
+            height: 24px;
+            background: #ff6b35;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .performer-rank.gold {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #92400e;
+        }
+
+        .performer-rank.silver {
+            background: linear-gradient(135deg, #c0c0c0, #e5e5e5);
+            color: #374151;
+        }
+
+        .performer-rank.bronze {
+            background: linear-gradient(135deg, #cd7f32, #d4a574);
+            color: #ffffff;
+        }
+
+        .performer-name {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .performer-dept {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .performer-score {
+            font-weight: 600;
+            color: #ff6b35;
+        }
+
+        .course-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .course-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .course-item:last-child {
+            border-bottom: none;
+        }
+
+        .course-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .course-category-small {
+            font-size: 0.7rem;
+            color: #6b7280;
+        }
+
+        .course-stats {
+            text-align: right;
+            font-size: 0.8rem;
+        }
+
+        .course-enrollments {
+            font-weight: 600;
+            color: #ff6b35;
+        }
+
+        .course-rating {
+            color: #6b7280;
+        }
+
+        .recent-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .recent-item:last-child {
+            border-bottom: none;
+        }
+
+        .recent-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .recent-content h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .recent-meta {
+            font-size: 0.7rem;
+            color: #6b7280;
+        }
+
+        .new-badge {
+            background: #10b981;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        /* Performance & Analytics Section */
+        .performance-section {
+            padding: 100px 0;
+            background: #ffffff;
+        }
+
+        .performance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .performance-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .performance-card:hover {
+            border-color: #ff6b35;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.1);
+        }
+
+        .performance-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .performance-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .performance-tabs {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: #ff6b35;
+            color: white;
+            border-color: #ff6b35;
+        }
+
+        .tab-btn:hover {
+            border-color: #ff6b35;
+        }
+
+        .performer-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .performer-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .performer-item:last-child {
+            border-bottom: none;
+        }
+
+        .performer-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .performer-rank {
+            width: 24px;
+            height: 24px;
+            background: #ff6b35;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .performer-rank.gold {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #92400e;
+        }
+
+        .performer-rank.silver {
+            background: linear-gradient(135deg, #c0c0c0, #e5e5e5);
+            color: #374151;
+        }
+
+        .performer-rank.bronze {
+            background: linear-gradient(135deg, #cd7f32, #d4a574);
+            color: #ffffff;
+        }
+
+        .performer-name {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .performer-dept {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .performer-score {
+            font-weight: 600;
+            color: #ff6b35;
+        }
+
+        .course-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .course-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .course-item:last-child {
+            border-bottom: none;
+        }
+
+        .course-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .course-category-small {
+            font-size: 0.7rem;
+            color: #6b7280;
+        }
+
+        .course-stats {
+            text-align: right;
+            font-size: 0.8rem;
+        }
+
+        .course-enrollments {
+            font-weight: 600;
+            color: #ff6b35;
+        }
+
+        .course-rating {
+            color: #6b7280;
+        }
+
+        .recent-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .recent-item:last-child {
+            border-bottom: none;
+        }
+
+        .recent-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .recent-content h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .recent-meta {
+            font-size: 0.7rem;
+            color: #6b7280;
+        }
+
+        .new-badge {
+            background: #10b981;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                AI-Enhanced LMS
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#platform">Platform</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#support">Support</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+
+            <div class="header-cta">
+                <a href="#" class="btn btn-secondary">Sign In</a>
+                <a href="demo-lms.html" class="btn btn-primary">
+                    <i class="fas fa-play"></i>
+                    Get Demo
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content slide-in-left">
+                <h1>GAIL <span class="highlight">AI-Enhanced</span> Learning Management System</h1>
+                <p>Empowering GAIL employees with intelligent learning experiences. Advanced AI technology delivers personalized training paths, adaptive assessments, and comprehensive skill development for our workforce.</p>
+
+                <div class="hero-cta">
+                    <a href="demo-lms.html" class="btn btn-primary btn-large">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Access Platform
+                    </a>
+                    <a href="#platform" class="btn btn-secondary btn-large">
+                        <i class="fas fa-play"></i>
+                        View Demo
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">5,000+</span>
+                        <span class="stat-label">GAIL Employees</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Course Completion</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">AI Support</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual slide-in-right">
+                <div class="platform-preview floating">
+                    <div class="preview-header">
+                        <div class="preview-dot red"></div>
+                        <div class="preview-dot yellow"></div>
+                        <div class="preview-dot green"></div>
+                        <span style="margin-left: 1rem; font-size: 0.875rem; color: #6b7280;">AI-Enhanced LMS Platform</span>
+                    </div>
+                    <div class="preview-content">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">
+                            <i class="fas fa-brain" style="margin-right: 0.5rem;"></i>
+                            AI Learning Dashboard
+                        </h3>
+                        <p style="opacity: 0.9; margin-bottom: 2rem;">Experience personalized learning paths, intelligent recommendations, and real-time progress tracking.</p>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center;">
+                                <i class="fas fa-chart-line" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                                <div style="font-size: 0.875rem;">Analytics</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center;">
+                                <i class="fas fa-users" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                                <div style="font-size: 0.875rem;">Social Learning</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; text-align: center;">
+                                <i class="fas fa-robot" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                                <div style="font-size: 0.875rem;">AI Assistant</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Platform Features</div>
+                <h2 class="section-title">Comprehensive learning solutions for GAIL</h2>
+                <p class="section-subtitle">Advanced AI-powered platform designed specifically for GAIL employees, delivering personalized learning experiences, intelligent assessments, and collaborative tools to enhance workforce capabilities.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">AI-Powered Intelligence</h3>
+                    <p class="feature-description">Advanced machine learning algorithms create personalized learning paths, adaptive assessments, and intelligent recommendations tailored to each GAIL employee's role and career development needs.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Advanced Analytics</h3>
+                    <p class="feature-description">Real-time dashboards and comprehensive reporting provide deep insights into employee learning progress, skill development, and training effectiveness across GAIL departments.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Social Learning</h3>
+                    <p class="feature-description">Foster collaboration among GAIL employees through discussion forums, study groups, peer reviews, and expert mentorship programs that enhance knowledge sharing across teams.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Mobile-First Design</h3>
+                    <p class="feature-description">Seamless learning experience across all devices with responsive design, offline capabilities, and native mobile apps for iOS and Android.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Enterprise Security</h3>
+                    <p class="feature-description">Enterprise-grade security with GAIL's existing authentication systems, advanced encryption, role-based access control, and comprehensive audit trails to protect organizational data.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="feature-title">Certification & Compliance</h3>
+                    <p class="feature-description">Automated certification tracking, compliance monitoring, and skill validation. Ensures all GAIL employees meet mandatory training requirements and industry standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Catalog Section -->
+    <section class="course-catalog" id="courses">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Course Catalog</div>
+                <h2 class="section-title">Comprehensive Training Programs for GAIL</h2>
+                <p class="section-subtitle">Explore our extensive library of courses designed specifically for GAIL employees, covering safety protocols, technical skills, leadership development, and industry best practices.</p>
+            </div>
+
+            <div class="course-slider">
+                <div class="course-track" id="courseTrack">
+                    <!-- First set of courses -->
+                    <div class="course-slide">
+                        <div class="course-category">Safety & Compliance</div>
+                        <h3 class="course-title">Advanced Safety Protocols</h3>
+                        <p class="course-description">Comprehensive safety training covering pipeline operations, emergency procedures, and risk management protocols.</p>
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>8 hours</span>
+                            </div>
+                            <div class="course-level level-intermediate">Intermediate</div>
+                        </div>
+                        <button class="course-cta" onclick="window.open('demo-lms.html', '_blank')">
+                            Start Course
+                        </button>
+                    </div>
+
+                    <div class="course-slide">
+                        <div class="course-category">Technical Operations</div>
+                        <h3 class="course-title">Pipeline Operations Fundamentals</h3>
+                        <p class="course-description">Essential knowledge for pipeline operations including maintenance procedures and monitoring systems.</p>
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>12 hours</span>
+                            </div>
+                            <div class="course-level level-beginner">Beginner</div>
+                        </div>
+                        <button class="course-cta" onclick="window.open('demo-lms.html', '_blank')">
+                            Start Course
+                        </button>
+                    </div>
+
+                    <div class="course-slide">
+                        <div class="course-category">Technology & Innovation</div>
+                        <h3 class="course-title">AI in Energy Sector</h3>
+                        <p class="course-description">Understanding artificial intelligence applications in modern energy management and optimization.</p>
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>6 hours</span>
+                            </div>
+                            <div class="course-level level-beginner">Beginner</div>
+                        </div>
+                        <button class="course-cta" onclick="window.open('demo-lms.html', '_blank')">
+                            Start Course
+                        </button>
+                    </div>
+
+                    <div class="course-slide">
+                        <div class="course-category">Emergency Management</div>
+                        <h3 class="course-title">Emergency Response Training</h3>
+                        <p class="course-description">Critical emergency response procedures and crisis management for GAIL facilities.</p>
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>10 hours</span>
+                            </div>
+                            <div class="course-level level-advanced">Advanced</div>
+                        </div>
+                        <button class="course-cta" onclick="window.open('demo-lms.html', '_blank')">
+                            Start Course
+                        </button>
+                    </div>
+
+                    <div class="course-slide">
+                        <div class="course-category">Leadership & Management</div>
+                        <h3 class="course-title">Leadership Development Program</h3>
+                        <p class="course-description">Comprehensive leadership training covering team management and strategic thinking.</p>
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>15 hours</span>
+                            </div>
+                            <div class="course-level level-intermediate">Intermediate</div>
+                        </div>
+                        <button class="course-cta" onclick="window.open('demo-lms.html', '_blank')">
+                            Start Course
+                        </button>
+                    </div>
+
+                    <div class="course-slide">
+                        <div class="course-category">Data & Analytics</div>
+                        <h3 class="course-title">Data Analytics for Energy</h3>
+                        <p class="course-description">Learn data analysis techniques and business intelligence applications for energy sector.</p>
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>9 hours</span>
+                            </div>
+                            <div class="course-level level-intermediate">Intermediate</div>
+                        </div>
+                        <button class="course-cta" onclick="window.open('demo-lms.html', '_blank')">
+                            Start Course
+                        </button>
+                    </div>
+
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="course-slide">
+                        <div class="course-category">Safety & Compliance</div>
+                        <h3 class="course-title">Advanced Safety Protocols</h3>
+                        <p class="course-description">Comprehensive safety training covering pipeline operations, emergency procedures, and risk management protocols.</p>
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>8 hours</span>
+                            </div>
+                            <div class="course-level level-intermediate">Intermediate</div>
+                        </div>
+                        <button class="course-cta" onclick="window.open('demo-lms.html', '_blank')">
+                            Start Course
+                        </button>
+                    </div>
+
+                    <div class="course-slide">
+                        <div class="course-category">Technical Operations</div>
+                        <h3 class="course-title">Pipeline Operations Fundamentals</h3>
+                        <p class="course-description">Essential knowledge for pipeline operations including maintenance procedures and monitoring systems.</p>
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>12 hours</span>
+                            </div>
+                            <div class="course-level level-beginner">Beginner</div>
+                        </div>
+                        <button class="course-cta" onclick="window.open('demo-lms.html', '_blank')">
+                            Start Course
+                        </button>
+                    </div>
+
+                    <div class="course-slide">
+                        <div class="course-category">Technology & Innovation</div>
+                        <h3 class="course-title">AI in Energy Sector</h3>
+                        <p class="course-description">Understanding artificial intelligence applications in modern energy management and optimization.</p>
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>6 hours</span>
+                            </div>
+                            <div class="course-level level-beginner">Beginner</div>
+                        </div>
+                        <button class="course-cta" onclick="window.open('demo-lms.html', '_blank')">
+                            Start Course
+                        </button>
+                    </div>
+
+                    <div class="course-slide">
+                        <div class="course-category">Emergency Management</div>
+                        <h3 class="course-title">Emergency Response Training</h3>
+                        <p class="course-description">Critical emergency response procedures and crisis management for GAIL facilities.</p>
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>10 hours</span>
+                            </div>
+                            <div class="course-level level-advanced">Advanced</div>
+                        </div>
+                        <button class="course-cta" onclick="window.open('demo-lms.html', '_blank')">
+                            Start Course
+                        </button>
+                    </div>
+
+                    <div class="course-slide">
+                        <div class="course-category">Leadership & Management</div>
+                        <h3 class="course-title">Leadership Development Program</h3>
+                        <p class="course-description">Comprehensive leadership training covering team management and strategic thinking.</p>
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>15 hours</span>
+                            </div>
+                            <div class="course-level level-intermediate">Intermediate</div>
+                        </div>
+                        <button class="course-cta" onclick="window.open('demo-lms.html', '_blank')">
+                            Start Course
+                        </button>
+                    </div>
+
+                    <div class="course-slide">
+                        <div class="course-category">Data & Analytics</div>
+                        <h3 class="course-title">Data Analytics for Energy</h3>
+                        <p class="course-description">Learn data analysis techniques and business intelligence applications for energy sector.</p>
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>9 hours</span>
+                            </div>
+                            <div class="course-level level-intermediate">Intermediate</div>
+                        </div>
+                        <button class="course-cta" onclick="window.open('demo-lms.html', '_blank')">
+                            Start Course
+                        </button>
+                    </div>
+                </div>
+
+                <div class="auto-scroll-indicator">
+                    <div class="scroll-pause-hint">
+                        <i class="fas fa-mouse"></i> Hover to pause auto-scroll
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance & Analytics Section -->
+    <section class="performance-section" id="analytics">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Learning Analytics</div>
+                <h2 class="section-title">GAIL Learning Performance Dashboard</h2>
+                <p class="section-subtitle">Track top performers, popular courses, and latest additions to our comprehensive learning platform.</p>
+            </div>
+
+            <div class="performance-grid">
+                <!-- Top Performers Card -->
+                <div class="performance-card">
+                    <div class="performance-header">
+                        <h3 class="performance-title">🏆 Top Performers</h3>
+                        <div class="performance-tabs">
+                            <button class="tab-btn active" onclick="switchPerformerTab('day', this)">Day</button>
+                            <button class="tab-btn" onclick="switchPerformerTab('week', this)">Week</button>
+                            <button class="tab-btn" onclick="switchPerformerTab('month', this)">Month</button>
+                        </div>
+                    </div>
+
+                    <ul class="performer-list" id="performerList">
+                        <li class="performer-item">
+                            <div class="performer-info">
+                                <div class="performer-rank gold">1</div>
+                                <div>
+                                    <div class="performer-name">Priya Kapoor</div>
+                                    <div class="performer-dept">Operations</div>
+                                </div>
+                            </div>
+                            <div class="performer-score">2,450 pts</div>
+                        </li>
+                        <li class="performer-item">
+                            <div class="performer-info">
+                                <div class="performer-rank silver">2</div>
+                                <div>
+                                    <div class="performer-name">Amit Singh</div>
+                                    <div class="performer-dept">Safety</div>
+                                </div>
+                            </div>
+                            <div class="performer-score">2,380 pts</div>
+                        </li>
+                        <li class="performer-item">
+                            <div class="performer-info">
+                                <div class="performer-rank bronze">3</div>
+                                <div>
+                                    <div class="performer-name">Rahul Sharma</div>
+                                    <div class="performer-dept">Technical</div>
+                                </div>
+                            </div>
+                            <div class="performer-score">2,340 pts</div>
+                        </li>
+                        <li class="performer-item">
+                            <div class="performer-info">
+                                <div class="performer-rank">4</div>
+                                <div>
+                                    <div class="performer-name">Sneha Verma</div>
+                                    <div class="performer-dept">Analytics</div>
+                                </div>
+                            </div>
+                            <div class="performer-score">2,290 pts</div>
+                        </li>
+                        <li class="performer-item">
+                            <div class="performer-info">
+                                <div class="performer-rank">5</div>
+                                <div>
+                                    <div class="performer-name">Dr. Rajesh Gupta</div>
+                                    <div class="performer-dept">Engineering</div>
+                                </div>
+                            </div>
+                            <div class="performer-score">2,250 pts</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Top 10 Courses Card -->
+                <div class="performance-card">
+                    <div class="performance-header">
+                        <h3 class="performance-title">📚 Most Popular Courses</h3>
+                    </div>
+
+                    <ul class="course-list" id="popularCourses">
+                        <li class="course-item">
+                            <div class="course-info">
+                                <h4>Advanced Safety Protocols</h4>
+                                <div class="course-category-small">Safety & Compliance</div>
+                            </div>
+                            <div class="course-stats">
+                                <div class="course-enrollments">1,247 enrolled</div>
+                                <div class="course-rating">⭐ 4.9</div>
+                            </div>
+                        </li>
+                        <li class="course-item">
+                            <div class="course-info">
+                                <h4>Pipeline Operations Fundamentals</h4>
+                                <div class="course-category-small">Technical Operations</div>
+                            </div>
+                            <div class="course-stats">
+                                <div class="course-enrollments">1,156 enrolled</div>
+                                <div class="course-rating">⭐ 4.8</div>
+                            </div>
+                        </li>
+                        <li class="course-item">
+                            <div class="course-info">
+                                <h4>Emergency Response Training</h4>
+                                <div class="course-category-small">Emergency Management</div>
+                            </div>
+                            <div class="course-stats">
+                                <div class="course-enrollments">1,089 enrolled</div>
+                                <div class="course-rating">⭐ 4.9</div>
+                            </div>
+                        </li>
+                        <li class="course-item">
+                            <div class="course-info">
+                                <h4>Leadership Development Program</h4>
+                                <div class="course-category-small">Leadership & Management</div>
+                            </div>
+                            <div class="course-stats">
+                                <div class="course-enrollments">987 enrolled</div>
+                                <div class="course-rating">⭐ 4.7</div>
+                            </div>
+                        </li>
+                        <li class="course-item">
+                            <div class="course-info">
+                                <h4>Data Analytics for Energy</h4>
+                                <div class="course-category-small">Data & Analytics</div>
+                            </div>
+                            <div class="course-stats">
+                                <div class="course-enrollments">856 enrolled</div>
+                                <div class="course-rating">⭐ 4.6</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Recent Additions Card -->
+                <div class="performance-card">
+                    <div class="performance-header">
+                        <h3 class="performance-title">🆕 Recent Course Additions</h3>
+                    </div>
+
+                    <div class="recent-list" id="recentCourses">
+                        <div class="recent-item">
+                            <div class="recent-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="recent-content">
+                                <h4>AI in Energy Sector</h4>
+                                <div class="recent-meta">Added 2 days ago • Technology & Innovation</div>
+                            </div>
+                            <div class="new-badge">NEW</div>
+                        </div>
+
+                        <div class="recent-item">
+                            <div class="recent-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="recent-content">
+                                <h4>Advanced Data Visualization</h4>
+                                <div class="recent-meta">Added 5 days ago • Data & Analytics</div>
+                            </div>
+                            <div class="new-badge">NEW</div>
+                        </div>
+
+                        <div class="recent-item">
+                            <div class="recent-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="recent-content">
+                                <h4>Environmental Compliance</h4>
+                                <div class="recent-meta">Added 1 week ago • Compliance & Regulations</div>
+                            </div>
+                        </div>
+
+                        <div class="recent-item">
+                            <div class="recent-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="recent-content">
+                                <h4>Process Optimization</h4>
+                                <div class="recent-meta">Added 1 week ago • Technical Operations</div>
+                            </div>
+                        </div>
+
+                        <div class="recent-item">
+                            <div class="recent-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="recent-content">
+                                <h4>Stakeholder Management</h4>
+                                <div class="recent-meta">Added 2 weeks ago • Leadership & Management</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Showcase Section -->
+    <section class="ai-showcase" id="ai-demo">
+        <div class="container">
+            <div class="ai-container">
+                <div class="ai-content">
+                    <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem;">Meet Your AI Learning Assistant</h2>
+                    <p style="font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9;">Our intelligent AI assistant provides 24/7 support, personalized recommendations, and adaptive learning experiences tailored to each learner's needs.</p>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="margin-bottom: 1rem; color: #667eea;">Key AI Capabilities:</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.8rem; display: flex; align-items: center;">
+                                <i class="fas fa-check-circle" style="color: #4CAF50; margin-right: 12px;"></i>
+                                Intelligent course recommendations with 95% accuracy
+                            </li>
+                            <li style="margin-bottom: 0.8rem; display: flex; align-items: center;">
+                                <i class="fas fa-check-circle" style="color: #4CAF50; margin-right: 12px;"></i>
+                                Adaptive assessments that adjust difficulty in real-time
+                            </li>
+                            <li style="margin-bottom: 0.8rem; display: flex; align-items: center;">
+                                <i class="fas fa-check-circle" style="color: #4CAF50; margin-right: 12px;"></i>
+                                Natural language processing for instant support
+                            </li>
+                            <li style="margin-bottom: 0.8rem; display: flex; align-items: center;">
+                                <i class="fas fa-check-circle" style="color: #4CAF50; margin-right: 12px;"></i>
+                                Predictive analytics for learning outcome optimization
+                            </li>
+                        </ul>
+                    </div>
+
+                    <a href="demo-lms.html" class="btn btn-primary">Experience AI Demo</a>
+                </div>
+
+                <div class="ai-demo">
+                    <h4 style="margin-bottom: 1rem; display: flex; align-items: center;">
+                        <i class="fas fa-robot" style="margin-right: 10px; color: #667eea;"></i>
+                        AI Assistant Demo
+                    </h4>
+
+                    <div class="chat-interface">
+                        <div class="chat-message">
+                            <strong>AI Assistant:</strong> Hi Rahul! I've analyzed your learning progress and recommend focusing on Pipeline Safety Management next. This aligns with your career goals and current skill gaps.
+                        </div>
+                        <div class="chat-message">
+                            <strong>You:</strong> What's the estimated completion time?
+                        </div>
+                        <div class="chat-message">
+                            <strong>AI Assistant:</strong> Based on your learning pace, approximately 4 hours. I can schedule practice assessments and connect you with expert mentors to accelerate your progress.
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(102, 126, 234, 0.1); border-radius: 8px; border-left: 3px solid #667eea;">
+                        <small style="opacity: 0.8;">💡 AI Insight: Your completion rate is 15% above average. Keep up the excellent work!</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Learning Experience?</h2>
+                <p>Join thousands of organizations already using our AI-enhanced platform to accelerate employee development and drive business results.</p>
+                <div class="cta-buttons">
+                    <a href="demo-lms.html" class="btn btn-primary" style="background: white; color: #667eea; margin-right: 1rem;">Start Free Trial</a>
+                    <a href="#contact" class="btn btn-outline">Schedule Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AI-Enhanced LMS</h3>
+                    <p style="color: #cbd5e0; margin-bottom: 1rem;">Transforming corporate learning with artificial intelligence and innovative technology.</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: #667eea; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: #667eea; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #667eea; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <a href="#features">Features</a>
+                    <a href="#ai-demo">AI Demo</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="demo-lms.html">Live Demo</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <a href="#about">About Us</a>
+                    <a href="#careers">Careers</a>
+                    <a href="#blog">Blog</a>
+                    <a href="#contact">Contact</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <a href="#help">Help Center</a>
+                    <a href="#docs">Documentation</a>
+                    <a href="#api">API Reference</a>
+                    <a href="#status">System Status</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 AI-Enhanced LMS. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards and sections
+        document.querySelectorAll('.feature-card, .performance-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Demo button click tracking
+        document.querySelectorAll('a[href="demo-lms.html"]').forEach(button => {
+            button.addEventListener('click', () => {
+                console.log('Demo button clicked');
+                // Add analytics tracking here
+            });
+        });
+
+        // Course Auto-Scroll Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Course auto-scroll initialized');
+            // Auto-scroll is handled by CSS animation
+            // No JavaScript needed for basic auto-scroll
+        });
+
+        // Performance Tab Switching
+        const performerData = {
+            day: [
+                { name: 'Priya Kapoor', dept: 'Operations', score: '2,450 pts', rank: 1 },
+                { name: 'Amit Singh', dept: 'Safety', score: '2,380 pts', rank: 2 },
+                { name: 'Rahul Sharma', dept: 'Technical', score: '2,340 pts', rank: 3 },
+                { name: 'Sneha Verma', dept: 'Analytics', score: '2,290 pts', rank: 4 },
+                { name: 'Dr. Rajesh Gupta', dept: 'Engineering', score: '2,250 pts', rank: 5 }
+            ],
+            week: [
+                { name: 'Amit Singh', dept: 'Safety', score: '12,450 pts', rank: 1 },
+                { name: 'Priya Kapoor', dept: 'Operations', score: '11,890 pts', rank: 2 },
+                { name: 'Dr. Rajesh Gupta', dept: 'Engineering', score: '11,340 pts', rank: 3 },
+                { name: 'Sneha Verma', dept: 'Analytics', score: '10,890 pts', rank: 4 },
+                { name: 'Rahul Sharma', dept: 'Technical', score: '10,450 pts', rank: 5 }
+            ],
+            month: [
+                { name: 'Dr. Rajesh Gupta', dept: 'Engineering', score: '45,670 pts', rank: 1 },
+                { name: 'Priya Kapoor', dept: 'Operations', score: '43,290 pts', rank: 2 },
+                { name: 'Amit Singh', dept: 'Safety', score: '41,850 pts', rank: 3 },
+                { name: 'Sneha Verma', dept: 'Analytics', score: '39,450 pts', rank: 4 },
+                { name: 'Rahul Sharma', dept: 'Technical', score: '37,890 pts', rank: 5 }
+            ]
+        };
+
+        function switchPerformerTab(period, button) {
+            // Update active tab
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Update performer list
+            const performerList = document.getElementById('performerList');
+            const data = performerData[period];
+
+            performerList.innerHTML = data.map(performer => {
+                let rankClass = '';
+                if (performer.rank === 1) rankClass = 'gold';
+                else if (performer.rank === 2) rankClass = 'silver';
+                else if (performer.rank === 3) rankClass = 'bronze';
+
+                return `
+                    <li class="performer-item">
+                        <div class="performer-info">
+                            <div class="performer-rank ${rankClass}">${performer.rank}</div>
+                            <div>
+                                <div class="performer-name">${performer.name}</div>
+                                <div class="performer-dept">${performer.dept}</div>
+                            </div>
+                        </div>
+                        <div class="performer-score">${performer.score}</div>
+                    </li>
+                `;
+            }).join('');
+        }
+
+        // Auto-refresh performance data (simulate real-time updates)
+        setInterval(() => {
+            // Simulate small score changes
+            const activeTab = document.querySelector('.tab-btn.active').textContent.toLowerCase();
+            const currentData = performerData[activeTab];
+
+            // Randomly update one performer's score
+            const randomIndex = Math.floor(Math.random() * currentData.length);
+            const currentScore = parseInt(currentData[randomIndex].score.replace(/[^\d]/g, ''));
+            const newScore = currentScore + Math.floor(Math.random() * 10) + 1;
+            currentData[randomIndex].score = newScore.toLocaleString() + ' pts';
+
+            // Refresh the display
+            const activeButton = document.querySelector('.tab-btn.active');
+            switchPerformerTab(activeTab, activeButton);
+        }, 30000); // Update every 30 seconds
+    </script>
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot-widget">
+        <button class="chatbot-button" id="chatbotButton" onclick="toggleChatbot()">
+            <i class="fas fa-comments" id="chatbotIcon"></i>
+        </button>
+
+        <div class="chatbot-panel" id="chatbotPanel">
+            <div class="chatbot-header">
+                <div>
+                    <h4 style="margin: 0; font-size: 1rem;">🎓 GAIL LMS Assistant</h4>
+                    <small style="opacity: 0.8; font-size: 0.8rem;">Platform & Course Information</small>
+                </div>
+                <button class="chatbot-close" onclick="closeChatbot()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="chatbot-body">
+                <div class="chatbot-messages" id="chatbotMessages">
+                    <div class="chat-message bot">
+                        <strong>GAIL LMS Assistant:</strong> Welcome to GAIL's AI-Enhanced Learning Management System! I can help you understand our platform features, course content, and learning capabilities. What would you like to know?
+                    </div>
+                </div>
+                <div class="chatbot-input">
+                    <input type="text" id="chatbotInput" placeholder="Ask about features, courses, or platform capabilities..." onkeypress="handleChatbotInput(event)">
+                    <button class="chatbot-send" onclick="sendChatbotMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chatbot Widget Functions
+        function toggleChatbot() {
+            const panel = document.getElementById('chatbotPanel');
+            const button = document.getElementById('chatbotButton');
+            const icon = document.getElementById('chatbotIcon');
+
+            if (panel.classList.contains('open')) {
+                closeChatbot();
+            } else {
+                panel.classList.add('open');
+                button.classList.add('active');
+                icon.className = 'fas fa-times';
+
+                // Focus on input when opened
+                setTimeout(() => {
+                    document.getElementById('chatbotInput').focus();
+                }, 300);
+            }
+        }
+
+        function closeChatbot() {
+            const panel = document.getElementById('chatbotPanel');
+            const button = document.getElementById('chatbotButton');
+            const icon = document.getElementById('chatbotIcon');
+
+            panel.classList.remove('open');
+            button.classList.remove('active');
+            icon.className = 'fas fa-comments';
+        }
+
+        function sendChatbotMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            // Add user message
+            addChatbotMessage(message, 'user');
+            input.value = '';
+
+            // Simulate AI response based on keywords
+            setTimeout(() => {
+                const lowerMessage = message.toLowerCase();
+                let response = "";
+
+                if (lowerMessage.includes('feature') || lowerMessage.includes('capability')) {
+                    response = "Our LMS includes AI-powered personalization, real-time analytics, social learning, mobile access, enterprise security, and certification & compliance tracking. Which feature would you like to explore in detail?";
+                } else if (lowerMessage.includes('course') || lowerMessage.includes('training') || lowerMessage.includes('content')) {
+                    response = "GAIL LMS offers courses in Safety Protocols, Pipeline Operations, AI in Energy Sector, Emergency Response, Leadership Development, and Technical Skills. All courses include videos, documents, interactive assessments, and peer collaboration.";
+                } else if (lowerMessage.includes('ai') || lowerMessage.includes('intelligent') || lowerMessage.includes('personalization')) {
+                    response = "Our AI creates personalized learning paths based on your role, experience, and goals. It provides adaptive assessments, intelligent recommendations, and real-time progress tracking tailored for each GAIL employee.";
+                } else if (lowerMessage.includes('analytics') || lowerMessage.includes('dashboard') || lowerMessage.includes('progress')) {
+                    response = "The analytics dashboard shows real-time learning progress, skill development tracking, course completion rates, and department-wise performance metrics. Managers can monitor team progress and identify training needs.";
+                } else if (lowerMessage.includes('social') || lowerMessage.includes('collaboration') || lowerMessage.includes('forum')) {
+                    response = "Social learning features include discussion forums, study groups, peer reviews, expert mentorship, and knowledge sharing. GAIL employees can collaborate across departments and learn from each other.";
+                } else if (lowerMessage.includes('mobile') || lowerMessage.includes('device') || lowerMessage.includes('access')) {
+                    response = "Access the platform from any device - desktop, tablet, or mobile. All courses work offline, sync progress automatically, and provide consistent experience across all devices for GAIL employees.";
+                } else if (lowerMessage.includes('security') || lowerMessage.includes('safe') || lowerMessage.includes('protection')) {
+                    response = "Enterprise-grade security with GAIL's authentication systems, role-based access control, data encryption, and comprehensive audit trails. All employee data is protected according to organizational standards.";
+                } else if (lowerMessage.includes('certification') || lowerMessage.includes('compliance') || lowerMessage.includes('certificate')) {
+                    response = "Automated certification tracking ensures all GAIL employees complete mandatory training. The system monitors compliance with industry standards, tracks skill validation, and generates certificates upon course completion.";
+                } else if (lowerMessage.includes('demo') || lowerMessage.includes('try') || lowerMessage.includes('test')) {
+                    response = "You can access the platform demo to explore all features hands-on. The demo includes sample courses, AI interactions, analytics dashboards, and social learning tools. Click 'Access Platform' to start!";
+                } else {
+                    const generalResponses = [
+                        "I can help you learn about our LMS platform features, available courses, AI capabilities, or analytics. What specific aspect interests you?",
+                        "Our platform offers comprehensive learning solutions for GAIL employees. Would you like to know about courses, features, or AI personalization?",
+                        "The LMS includes safety training, technical courses, leadership development, and more. What type of training are you interested in?",
+                        "I can explain our AI-powered features, social learning tools, or mobile capabilities. What would you like to explore?",
+                        "Our platform supports all GAIL departments with specialized courses and features. Which area would you like to learn about?"
+                    ];
+                    response = generalResponses[Math.floor(Math.random() * generalResponses.length)];
+                }
+
+                addChatbotMessage(response, 'bot');
+            }, 1000);
+        }
+
+        function addChatbotMessage(message, sender) {
+            const chatMessages = document.getElementById('chatbotMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}`;
+
+            if (sender === 'bot') {
+                messageDiv.innerHTML = `<strong>GAIL LMS Assistant:</strong> ${message}`;
+            } else {
+                messageDiv.innerHTML = `<strong>You:</strong> ${message}`;
+            }
+
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function handleChatbotInput(event) {
+            if (event.key === 'Enter') {
+                sendChatbotMessage();
+            }
+        }
+
+        // Close chatbot when clicking outside
+        document.addEventListener('click', function(event) {
+            const widget = document.querySelector('.chatbot-widget');
+            const panel = document.getElementById('chatbotPanel');
+
+            if (!widget.contains(event.target) && panel.classList.contains('open')) {
+                closeChatbot();
+            }
+        });
+    </script>
+</body>
+</html>

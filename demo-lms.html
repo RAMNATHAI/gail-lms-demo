@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Enhanced LMS - Live Demo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .demo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 0;
+            min-height: calc(100vh - 89px);
+            background: #ffffff;
+        }
+
+        .sidebar {
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            padding: 2rem 0;
+            overflow-y: auto;
+            position: sticky;
+            top: 89px;
+            height: calc(100vh - 89px);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 24px;
+            margin: 4px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #6b7280;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 0;
+            background: #ff6b35;
+            border-radius: 0 2px 2px 0;
+            transition: height 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 107, 53, 0.08);
+            color: #ff6b35;
+            transform: translateX(4px);
+        }
+
+        .nav-item:hover::before {
+            height: 24px;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .nav-item.active::before {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-area {
+            background: #ffffff;
+            padding: 2rem;
+            overflow-y: auto;
+            min-height: calc(100vh - 89px);
+        }
+
+        /* AI Chat Widget Styles */
+        .ai-chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .ai-chat-button {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(255, 107, 53, 0.6);
+        }
+
+        .ai-chat-button.active {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+
+        .ai-chat-panel {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .ai-chat-panel.open {
+            display: flex;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ai-chat-header {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-chat-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .ai-chat-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .ai-chat-body {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b35, #f7931e);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.1);
+            border-color: #ff6b35;
+        }
+
+        .course-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .course-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .course-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+        }
+
+        .difficulty-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .difficulty-beginner { background: #E8F5E8; color: #2E7D32; }
+        .difficulty-intermediate { background: #FFF3E0; color: #F57C00; }
+        .difficulty-advanced { background: #FFEBEE; color: #C62828; }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #E0E0E0;
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+            background: linear-gradient(135deg, #e55a2b, #e8851a);
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+
+        .btn-secondary:hover {
+            border-color: #ff6b35;
+            color: #ff6b35;
+            transform: translateY(-1px);
+        }
+
+        .ai-recommendations {
+            margin-bottom: 20px;
+        }
+
+        .recommendation-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .confidence-score {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 8px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .ai-chatbot {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ai-chat-messages {
+            flex-grow: 1;
+            max-height: 250px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding-right: 5px;
+        }
+
+        .ai-chat-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .ai-chat-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 2px;
+        }
+
+        .ai-chat-messages::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 2px;
+        }
+
+        .ai-chat-message {
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            max-width: 85%;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .ai-chat-message.bot {
+            background: #e3f2fd;
+            margin-right: auto;
+        }
+
+        .ai-chat-message.user {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+        }
+
+        .ai-chat-input {
+            display: flex;
+            gap: 8px;
+        }
+
+        .ai-chat-input input {
+            flex-grow: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            font-size: 0.9em;
+        }
+
+        .ai-chat-input input:focus {
+            border-color: #667eea;
+        }
+
+        .ai-chat-send {
+            width: 36px;
+            height: 36px;
+            background: #667eea;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .ai-chat-send:hover {
+            background: #e55a2b;
+        }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 260px 1fr;
+            }
+
+            .course-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: -280px;
+                top: 89px;
+                width: 280px;
+                height: calc(100vh - 89px);
+                z-index: 1000;
+                transition: left 0.3s ease;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .content-area {
+                padding: 1.5rem;
+            }
+
+            .header {
+                padding: 1rem 1.5rem;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .course-card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 1rem;
+            }
+
+            .content-area {
+                padding: 1rem;
+            }
+
+            .course-card {
+                padding: 16px;
+            }
+
+            .btn {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+        }
+
+        /* Smooth animations */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Focus states for accessibility */
+        .btn:focus,
+        .nav-item:focus {
+            outline: 2px solid #ff6b35;
+            outline-offset: 2px;
+        }
+
+        .assessment-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .question-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .answer-option {
+            padding: 10px 15px;
+            margin: 10px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .answer-option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .answer-option.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .hidden { display: none; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .learning-path {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .social-activity {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .activity-avatar {
+            width: 30px;
+            height: 30px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">AI</div>
+                    <div>
+                        <h2>AI-Enhanced LMS</h2>
+                        <p style="color: #666; font-size: 0.9em;">Intelligent Learning Platform</p>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <div style="text-align: right;">
+                        <div style="font-weight: 500;">Rahul Sharma</div>
+                        <div style="font-size: 0.8em; color: #666;">Operations Specialist</div>
+                    </div>
+                    <div class="user-avatar">RS</div>
+                    <button class="btn btn-primary" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar Navigation -->
+            <div class="sidebar">
+                <div class="nav-item active" onclick="showSection('dashboard')">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </div>
+                <div class="nav-item" onclick="showSection('courses')">
+                    <i class="fas fa-book"></i>
+                    <span>My Courses</span>
+                </div>
+                <div class="nav-item" onclick="showSection('catalog')">
+                    <i class="fas fa-search"></i>
+                    <span>Course Catalog</span>
+                </div>
+                <div class="nav-item" onclick="showSection('progress')">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Progress</span>
+                </div>
+                <div class="nav-item" onclick="showSection('social')">
+                    <i class="fas fa-users"></i>
+                    <span>Social Learning</span>
+                </div>
+                <div class="nav-item" onclick="showSection('achievements')">
+                    <i class="fas fa-trophy"></i>
+                    <span>Achievements</span>
+                </div>
+                <div class="nav-item" onclick="showSection('admin')" id="adminNav" style="display: none;">
+                    <i class="fas fa-cog"></i>
+                    <span>Admin Panel</span>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area" id="contentArea">
+                <!-- Dashboard Section -->
+                <div id="dashboard" class="content-section">
+                    <h1>Welcome back, Rahul! 🎓</h1>
+                    <p style="color: #666; margin-bottom: 30px;">Continue your learning journey with AI-powered recommendations</p>
+                    
+                    <!-- Stats Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">8</div>
+                            <div>Courses Enrolled</div>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #FF6B6B, #FF8E53);">
+                            <div class="stat-number">3</div>
+                            <div>Completed</div>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
+                            <div class="stat-number">7</div>
+                            <div>Day Streak</div>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #A8EDEA, #FED6E3);">
+                            <div class="stat-number" style="color: #333;">24h</div>
+                            <div style="color: #333;">Learning Time</div>
+                        </div>
+                    </div>
+
+                    <!-- Learning Path -->
+                    <div class="learning-path">
+                        <h3>🎯 Your Personalized Learning Path</h3>
+                        <p>AI has analyzed your progress and recommends focusing on Pipeline Safety Management</p>
+                        <div style="margin-top: 15px;">
+                            <button class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3);">
+                                View Full Path
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Current Courses -->
+                    <h3>📚 Continue Learning</h3>
+                    <div class="course-grid">
+                        <div class="course-card">
+                            <div class="course-header">
+                                <div class="course-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div style="flex-grow: 1;">
+                                    <h4>Safety Protocols Advanced</h4>
+                                    <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                                </div>
+                            </div>
+                            <p style="color: #666; margin-bottom: 15px;">Advanced safety procedures and emergency response protocols</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%;"></div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.9em; color: #666;">65% Complete</span>
+                                <button class="btn btn-primary" onclick="startCourse('safety')">Continue</button>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <div class="course-header">
+                                <div class="course-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div style="flex-grow: 1;">
+                                    <h4>AI in Energy Sector</h4>
+                                    <span class="difficulty-badge difficulty-beginner">Beginner</span>
+                                </div>
+                            </div>
+                            <p style="color: #666; margin-bottom: 15px;">Understanding AI applications in modern energy management</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 20%;"></div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.9em; color: #666;">20% Complete</span>
+                                <button class="btn btn-primary" onclick="startCourse('ai')">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other sections will be added here -->
+                <div id="courses" class="content-section hidden">
+                    <h1>My Courses</h1>
+                    <p>Manage your enrolled courses and track progress</p>
+                    <!-- Course content will be populated by JavaScript -->
+                </div>
+
+                <div id="catalog" class="content-section hidden">
+                    <h1>Course Catalog</h1>
+                    <p>Discover new courses and expand your skills</p>
+                    <!-- Catalog content will be populated by JavaScript -->
+                </div>
+
+                <div id="progress" class="content-section hidden">
+                    <h1>Learning Progress</h1>
+                    <p>Detailed analytics and performance insights</p>
+                    <!-- Progress content will be populated by JavaScript -->
+                </div>
+
+                <div id="social" class="content-section hidden">
+                    <h1>Social Learning Hub</h1>
+                    <p>Connect with peers and join study groups</p>
+                    <!-- Social content will be populated by JavaScript -->
+                </div>
+
+                <div id="achievements" class="content-section hidden">
+                    <h1>Achievements & Badges</h1>
+                    <p>Your learning milestones and certifications</p>
+                    <!-- Achievements content will be populated by JavaScript -->
+                </div>
+
+                <div id="admin" class="content-section hidden">
+                    <h1>Admin Panel</h1>
+                    <p>Manage courses, users, and system settings</p>
+                    <!-- Admin content will be populated by JavaScript -->
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- AI Chat Widget -->
+        <div class="ai-chat-widget">
+            <button class="ai-chat-button" id="aiChatButton" onclick="toggleAIChat()">
+                <i class="fas fa-robot" id="aiChatIcon"></i>
+            </button>
+
+            <div class="ai-chat-panel" id="aiChatPanel">
+                <div class="ai-chat-header">
+                    <div>
+                        <h4 style="margin: 0;">🤖 AI Assistant</h4>
+                        <small style="opacity: 0.8;">Always here to help</small>
+                    </div>
+                    <button class="ai-chat-close" onclick="closeAIChat()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="ai-chat-body">
+                    <!-- AI Recommendations -->
+                    <div class="ai-recommendations">
+                        <h5 style="margin-bottom: 10px;">💡 Smart Recommendations</h5>
+                        <div class="recommendation-card">
+                            <strong>Pipeline Maintenance Certification</strong>
+                            <p style="margin: 5px 0;">Based on your operations background</p>
+                            <div class="confidence-score">95% Match</div>
+                        </div>
+                        <div class="recommendation-card" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
+                            <strong>Digital Transformation Basics</strong>
+                            <p style="margin: 5px 0;">Trending in your department</p>
+                            <div class="confidence-score">87% Match</div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Interface -->
+                    <div class="ai-chatbot">
+                        <h5 style="margin-bottom: 10px;">💬 Chat Support</h5>
+                        <div class="ai-chat-messages" id="aiChatMessages">
+                            <div class="ai-chat-message bot">
+                                <strong>AI Assistant:</strong> Hi Rahul! I'm here to help with any questions about your courses or the platform. What would you like to know?
+                            </div>
+                        </div>
+                        <div class="ai-chat-input">
+                            <input type="text" id="aiChatInput" placeholder="Ask me anything..." onkeypress="handleAIChatInput(event)">
+                            <button class="ai-chat-send" onclick="sendAIMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assessment Modal -->
+    <div class="assessment-modal" id="assessmentModal">
+        <div class="modal-content">
+            <h2>AI-Powered Assessment</h2>
+            <div id="assessmentContent">
+                <!-- Assessment content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo data and functionality will be added in the next part
+        let currentUser = {
+            name: 'Rahul Sharma',
+            role: 'learner',
+            progress: {
+                coursesEnrolled: 8,
+                coursesCompleted: 3,
+                learningStreak: 7,
+                totalHours: 24
+            }
+        };
+
+        let currentSection = 'dashboard';
+
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+            document.getElementById(sectionId).classList.add('fade-in');
+            
+            // Add active class to clicked nav item
+            event.target.closest('.nav-item').classList.add('active');
+            
+            currentSection = sectionId;
+            
+            // Load section-specific content
+            loadSectionContent(sectionId);
+        }
+
+        function loadSectionContent(sectionId) {
+            const contentArea = document.getElementById(sectionId);
+            
+            switch(sectionId) {
+                case 'courses':
+                    loadMyCourses(contentArea);
+                    break;
+                case 'catalog':
+                    loadCourseCatalog(contentArea);
+                    break;
+                case 'progress':
+                    loadProgressAnalytics(contentArea);
+                    break;
+                case 'social':
+                    loadSocialLearning(contentArea);
+                    break;
+                case 'achievements':
+                    loadAchievements(contentArea);
+                    break;
+                case 'admin':
+                    loadAdminPanel(contentArea);
+                    break;
+            }
+        }
+
+        function startCourse(courseId) {
+            // Simulate starting a course
+            alert(`Starting course: ${courseId}. This would open the course content with multi-format materials (videos, PDFs, interactive elements).`);
+            
+            // Simulate triggering an assessment after some time
+            setTimeout(() => {
+                if(confirm('You\'ve completed a module! Would you like to take the AI-powered assessment?')) {
+                    showAssessment(courseId);
+                }
+            }, 2000);
+        }
+
+        function showAssessment(courseId) {
+            const modal = document.getElementById('assessmentModal');
+            const content = document.getElementById('assessmentContent');
+            
+            content.innerHTML = `
+                <div class="question-card">
+                    <h3>Question 1 of 3</h3>
+                    <p><strong>What is the primary safety protocol when working with high-pressure pipelines?</strong></p>
+                    <div class="answer-option" onclick="selectAnswer(this, 'a')">
+                        A) Always work alone for better focus
+                    </div>
+                    <div class="answer-option" onclick="selectAnswer(this, 'b')">
+                        B) Follow lockout/tagout procedures and work in pairs
+                    </div>
+                    <div class="answer-option" onclick="selectAnswer(this, 'c')">
+                        C) Use standard tools without special equipment
+                    </div>
+                    <div class="answer-option" onclick="selectAnswer(this, 'd')">
+                        D) Work during peak hours for better visibility
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn-primary" onclick="submitAssessment()">Submit Answer</button>
+                    <button class="btn" onclick="closeAssessment()" style="margin-left: 10px; background: #f0f0f0;">Close</button>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+
+        function selectAnswer(element, answer) {
+            // Remove selection from all options
+            document.querySelectorAll('.answer-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Select clicked option
+            element.classList.add('selected');
+            element.dataset.answer = answer;
+        }
+
+        function submitAssessment() {
+            const selected = document.querySelector('.answer-option.selected');
+            if (!selected) {
+                alert('Please select an answer first.');
+                return;
+            }
+            
+            // Simulate AI feedback
+            const isCorrect = selected.dataset.answer === 'b';
+            const feedback = isCorrect ? 
+                '✅ Correct! Lockout/tagout procedures and working in pairs are essential safety protocols.' :
+                '❌ Incorrect. The correct answer is B. Lockout/tagout procedures and working in pairs ensure maximum safety.';
+            
+            alert(feedback + '\n\nAI is adjusting the next question difficulty based on your performance...');
+            closeAssessment();
+        }
+
+        function closeAssessment() {
+            document.getElementById('assessmentModal').style.display = 'none';
+        }
+
+        // AI Chat Widget Functions
+        function toggleAIChat() {
+            const panel = document.getElementById('aiChatPanel');
+            const button = document.getElementById('aiChatButton');
+            const icon = document.getElementById('aiChatIcon');
+
+            if (panel.classList.contains('open')) {
+                closeAIChat();
+            } else {
+                panel.classList.add('open');
+                button.classList.add('active');
+                icon.className = 'fas fa-times';
+
+                // Focus on input when opened
+                setTimeout(() => {
+                    document.getElementById('aiChatInput').focus();
+                }, 300);
+            }
+        }
+
+        function closeAIChat() {
+            const panel = document.getElementById('aiChatPanel');
+            const button = document.getElementById('aiChatButton');
+            const icon = document.getElementById('aiChatIcon');
+
+            panel.classList.remove('open');
+            button.classList.remove('active');
+            icon.className = 'fas fa-robot';
+        }
+
+        function sendAIMessage() {
+            const input = document.getElementById('aiChatInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            // Add user message
+            addAIChatMessage(message, 'user');
+            input.value = '';
+
+            // Simulate AI response
+            setTimeout(() => {
+                const responses = [
+                    "I can help you with that! Let me find the relevant course materials for you.",
+                    "Based on your learning history, I recommend focusing on the safety protocols section first.",
+                    "You're making great progress! Your completion rate is 15% above average.",
+                    "I can explain that concept. Would you like me to suggest some additional resources?",
+                    "That's a great question! Let me connect you with the course instructor for detailed guidance.",
+                    "I notice you're working on pipeline safety. Would you like me to schedule a practice assessment?",
+                    "Your learning streak is impressive! Keep up the great work, Rahul!",
+                    "I can recommend some peer study groups that match your current learning goals."
+                ];
+
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                addAIChatMessage(randomResponse, 'bot');
+            }, 1000);
+        }
+
+        function addAIChatMessage(message, sender) {
+            const chatMessages = document.getElementById('aiChatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `ai-chat-message ${sender}`;
+
+            if (sender === 'bot') {
+                messageDiv.innerHTML = `<strong>AI Assistant:</strong> ${message}`;
+            } else {
+                messageDiv.innerHTML = `<strong>You:</strong> ${message}`;
+            }
+
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function handleAIChatInput(event) {
+            if (event.key === 'Enter') {
+                sendAIMessage();
+            }
+        }
+
+        // Close chat when clicking outside
+        document.addEventListener('click', function(event) {
+            const widget = document.querySelector('.ai-chat-widget');
+            const panel = document.getElementById('aiChatPanel');
+
+            if (!widget.contains(event.target) && panel.classList.contains('open')) {
+                closeAIChat();
+            }
+        });
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                alert('Logging out... In a real system, this would redirect to the login page.');
+            }
+        }
+
+        // Initialize demo
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('AI-Enhanced LMS Demo Loaded');
+            
+            // Simulate real-time updates
+            setInterval(() => {
+                // Update learning streak or other dynamic content
+                const streakElement = document.querySelector('.stat-card:nth-child(3) .stat-number');
+                if (streakElement && Math.random() > 0.95) {
+                    // Rarely update to simulate activity
+                    streakElement.textContent = parseInt(streakElement.textContent) + 1;
+                }
+            }, 5000);
+        });
+
+        // Additional functions for other sections
+        function loadMyCourses(container) {
+            container.innerHTML = `
+                <h1>📚 My Courses</h1>
+                <p style="color: #666; margin-bottom: 30px;">Manage your enrolled courses and track progress</p>
+
+                <div class="course-grid">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-icon"><i class="fas fa-shield-alt"></i></div>
+                            <div style="flex-grow: 1;">
+                                <h4>Safety Protocols Advanced</h4>
+                                <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                            </div>
+                        </div>
+                        <p style="color: #666; margin-bottom: 15px;">Advanced safety procedures and emergency response</p>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 65%;"></div></div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                            <span style="font-size: 0.9em; color: #666;">65% Complete • 4h remaining</span>
+                            <button class="btn btn-primary" onclick="startCourse('safety')">Continue</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);"><i class="fas fa-robot"></i></div>
+                            <div style="flex-grow: 1;">
+                                <h4>AI in Energy Sector</h4>
+                                <span class="difficulty-badge difficulty-beginner">Beginner</span>
+                            </div>
+                        </div>
+                        <p style="color: #666; margin-bottom: 15px;">Understanding AI applications in energy management</p>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 20%;"></div></div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                            <span style="font-size: 0.9em; color: #666;">20% Complete • 6h remaining</span>
+                            <button class="btn btn-primary" onclick="startCourse('ai')">Continue</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-icon" style="background: linear-gradient(135deg, #4CAF50, #45a049);"><i class="fas fa-check-circle"></i></div>
+                            <div style="flex-grow: 1;">
+                                <h4>Pipeline Basics</h4>
+                                <span class="difficulty-badge difficulty-beginner">Beginner</span>
+                            </div>
+                        </div>
+                        <p style="color: #666; margin-bottom: 15px;">Fundamental pipeline operations and maintenance</p>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                            <span style="font-size: 0.9em; color: #4CAF50;">✅ Completed • Certificate earned</span>
+                            <button class="btn" style="background: #f0f0f0;" onclick="viewCertificate()">View Certificate</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadCourseCatalog(container) {
+            container.innerHTML = `
+                <h1>🔍 Course Catalog</h1>
+                <p style="color: #666; margin-bottom: 30px;">Discover new courses and expand your skills</p>
+
+                <div style="margin-bottom: 30px;">
+                    <input type="text" placeholder="Search courses..." style="width: 300px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-right: 15px;">
+                    <select style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-right: 15px;">
+                        <option>All Categories</option>
+                        <option>Safety</option>
+                        <option>Technical</option>
+                        <option>Management</option>
+                        <option>AI & Technology</option>
+                    </select>
+                    <select style="padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                        <option>All Levels</option>
+                        <option>Beginner</option>
+                        <option>Intermediate</option>
+                        <option>Advanced</option>
+                    </select>
+                </div>
+
+                <div class="course-grid">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-icon" style="background: linear-gradient(135deg, #FF6B6B, #FF8E53);"><i class="fas fa-fire"></i></div>
+                            <div style="flex-grow: 1;">
+                                <h4>Emergency Response Training</h4>
+                                <span class="difficulty-badge difficulty-advanced">Advanced</span>
+                            </div>
+                        </div>
+                        <p style="color: #666; margin-bottom: 15px;">Comprehensive emergency response procedures</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                            <span style="font-size: 0.9em; color: #666;">8 hours • 4.8 ⭐ (124 reviews)</span>
+                            <button class="btn btn-primary" onclick="enrollCourse('emergency')">Enroll</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-icon" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);"><i class="fas fa-chart-line"></i></div>
+                            <div style="flex-grow: 1;">
+                                <h4>Data Analytics for Energy</h4>
+                                <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                            </div>
+                        </div>
+                        <p style="color: #666; margin-bottom: 15px;">Learn data analysis techniques for energy sector</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                            <span style="font-size: 0.9em; color: #666;">12 hours • 4.6 ⭐ (89 reviews)</span>
+                            <button class="btn btn-primary" onclick="enrollCourse('analytics')">Enroll</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-icon" style="background: linear-gradient(135deg, #A8EDEA, #FED6E3);"><i class="fas fa-users"></i></div>
+                            <div style="flex-grow: 1;">
+                                <h4>Leadership in Energy Sector</h4>
+                                <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                            </div>
+                        </div>
+                        <p style="color: #666; margin-bottom: 15px;">Develop leadership skills for energy industry</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                            <span style="font-size: 0.9em; color: #666;">6 hours • 4.9 ⭐ (156 reviews)</span>
+                            <button class="btn btn-primary" onclick="enrollCourse('leadership')">Enroll</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadProgressAnalytics(container) {
+            container.innerHTML = `
+                <h1>📊 Learning Progress</h1>
+                <p style="color: #666; margin-bottom: 30px;">Detailed analytics and performance insights</p>
+
+                <div class="stats-grid" style="margin-bottom: 30px;">
+                    <div class="stat-card">
+                        <div class="stat-number">85%</div>
+                        <div>Overall Progress</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #FF6B6B, #FF8E53);">
+                        <div class="stat-number">24</div>
+                        <div>Hours This Month</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
+                        <div class="stat-number">92%</div>
+                        <div>Assessment Average</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #A8EDEA, #FED6E3);">
+                        <div class="stat-number" style="color: #333;">7</div>
+                        <div style="color: #333;">Certificates Earned</div>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+                    <h3>📈 Learning Trends</h3>
+                    <div style="height: 200px; background: #f8f9fa; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-top: 15px;">
+                        <p style="color: #666;">📊 Interactive chart showing learning progress over time would be displayed here</p>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 12px;">
+                    <h3>🎯 Skill Development</h3>
+                    <div style="margin-top: 15px;">
+                        <div style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span>Safety Management</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span>Technical Operations</span>
+                                <span>72%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 72%;"></div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span>Data Analysis</span>
+                                <span>45%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadSocialLearning(container) {
+            container.innerHTML = `
+                <h1>👥 Social Learning Hub</h1>
+                <p style="color: #666; margin-bottom: 30px;">Connect with peers and join study groups</p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+                    <div style="background: white; padding: 20px; border-radius: 12px;">
+                        <h3>💬 Discussion Forums</h3>
+                        <div class="social-activity">
+                            <div class="activity-header">
+                                <div class="activity-avatar">PK</div>
+                                <div>
+                                    <strong>Priya Kapoor</strong>
+                                    <div style="font-size: 0.8em; color: #666;">2 hours ago</div>
+                                </div>
+                            </div>
+                            <p>Great insights on pipeline safety protocols! Has anyone tried the new inspection techniques?</p>
+                            <div style="margin-top: 10px; color: #666; font-size: 0.9em;">
+                                <i class="fas fa-thumbs-up"></i> 12 likes • <i class="fas fa-comment"></i> 5 replies
+                            </div>
+                        </div>
+
+                        <div class="social-activity">
+                            <div class="activity-header">
+                                <div class="activity-avatar" style="background: #FF6B6B;">AS</div>
+                                <div>
+                                    <strong>Amit Singh</strong>
+                                    <div style="font-size: 0.8em; color: #666;">4 hours ago</div>
+                                </div>
+                            </div>
+                            <p>Looking for study partners for the Advanced Safety certification. Anyone interested?</p>
+                            <div style="margin-top: 10px; color: #666; font-size: 0.9em;">
+                                <i class="fas fa-thumbs-up"></i> 8 likes • <i class="fas fa-comment"></i> 12 replies
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; padding: 20px; border-radius: 12px;">
+                        <h3>🤝 Study Groups</h3>
+                        <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                            <h4>Pipeline Safety Excellence</h4>
+                            <p style="color: #666; font-size: 0.9em; margin: 10px 0;">8 members • Next meeting: Tomorrow 2 PM</p>
+                            <button class="btn btn-primary" style="font-size: 0.9em; padding: 8px 16px;">Join Group</button>
+                        </div>
+
+                        <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                            <h4>AI in Energy - Beginners</h4>
+                            <p style="color: #666; font-size: 0.9em; margin: 10px 0;">12 members • Next meeting: Friday 3 PM</p>
+                            <button class="btn btn-primary" style="font-size: 0.9em; padding: 8px 16px;">Join Group</button>
+                        </div>
+
+                        <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px;">
+                            <h4>Leadership Development</h4>
+                            <p style="color: #666; font-size: 0.9em; margin: 10px 0;">6 members • Next meeting: Monday 4 PM</p>
+                            <button class="btn btn-primary" style="font-size: 0.9em; padding: 8px 16px;">Join Group</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 12px;">
+                    <h3>👨‍🏫 Expert Mentorship</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                        <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                <div style="width: 40px; height: 40px; background: #4CAF50; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">RG</div>
+                                <div>
+                                    <strong>Dr. Rajesh Gupta</strong>
+                                    <div style="font-size: 0.8em; color: #666;">Safety Engineering Expert</div>
+                                </div>
+                            </div>
+                            <p style="font-size: 0.9em; color: #666; margin-bottom: 10px;">20+ years in pipeline safety and risk management</p>
+                            <button class="btn btn-primary" style="font-size: 0.9em; padding: 8px 16px;">Request Mentorship</button>
+                        </div>
+
+                        <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                <div style="width: 40px; height: 40px; background: #FF6B6B; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">SV</div>
+                                <div>
+                                    <strong>Sneha Verma</strong>
+                                    <div style="font-size: 0.8em; color: #666;">AI Technology Specialist</div>
+                                </div>
+                            </div>
+                            <p style="font-size: 0.9em; color: #666; margin-bottom: 10px;">Leading AI implementation in energy sector</p>
+                            <button class="btn btn-primary" style="font-size: 0.9em; padding: 8px 16px;">Request Mentorship</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadAchievements(container) {
+            container.innerHTML = `
+                <h1>🏆 Achievements & Badges</h1>
+                <p style="color: #666; margin-bottom: 30px;">Your learning milestones and certifications</p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+                    <div style="background: white; padding: 20px; border-radius: 12px;">
+                        <h3>🎖️ Recent Achievements</h3>
+                        <div style="display: flex; align-items: center; gap: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; margin: 10px 0;">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #4CAF50, #45a049); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <strong>Safety Expert</strong>
+                                <div style="font-size: 0.9em; color: #666;">Completed advanced safety training</div>
+                                <div style="font-size: 0.8em; color: #4CAF50;">Earned 2 days ago</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; margin: 10px 0;">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #FF6B6B, #FF8E53); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div>
+                                <strong>7-Day Streak</strong>
+                                <div style="font-size: 0.9em; color: #666;">Consistent daily learning</div>
+                                <div style="font-size: 0.8em; color: #FF6B6B;">Active streak</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; margin: 10px 0;">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div>
+                                <strong>Top Performer</strong>
+                                <div style="font-size: 0.9em; color: #666;">95% average assessment score</div>
+                                <div style="font-size: 0.8em; color: #667eea;">Earned 1 week ago</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; padding: 20px; border-radius: 12px;">
+                        <h3>📜 Certificates</h3>
+                        <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin: 10px 0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <strong>Pipeline Operations Fundamentals</strong>
+                                    <div style="font-size: 0.9em; color: #666;">Issued: March 15, 2024</div>
+                                </div>
+                                <button class="btn" style="background: #f0f0f0; font-size: 0.9em; padding: 8px 16px;">Download</button>
+                            </div>
+                        </div>
+
+                        <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin: 10px 0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <strong>Safety Protocols Basic</strong>
+                                    <div style="font-size: 0.9em; color: #666;">Issued: February 28, 2024</div>
+                                </div>
+                                <button class="btn" style="background: #f0f0f0; font-size: 0.9em; padding: 8px 16px;">Download</button>
+                            </div>
+                        </div>
+
+                        <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin: 10px 0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <strong>Emergency Response Level 1</strong>
+                                    <div style="font-size: 0.9em; color: #666;">Issued: January 20, 2024</div>
+                                </div>
+                                <button class="btn" style="background: #f0f0f0; font-size: 0.9em; padding: 8px 16px;">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 12px;">
+                    <h3>📊 Progress Leaderboard</h3>
+                    <div style="margin-top: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border-radius: 8px; margin: 5px 0;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-weight: bold; color: #FFD700;">🥇</span>
+                                <span>Priya Kapoor</span>
+                            </div>
+                            <span style="font-weight: bold;">2,450 points</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border-radius: 8px; margin: 5px 0;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-weight: bold; color: #C0C0C0;">🥈</span>
+                                <span>Amit Singh</span>
+                            </div>
+                            <span style="font-weight: bold;">2,380 points</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #667eea; color: white; border-radius: 8px; margin: 5px 0;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-weight: bold; color: #CD7F32;">🥉</span>
+                                <span><strong>Rahul Sharma (You)</strong></span>
+                            </div>
+                            <span style="font-weight: bold;">2,340 points</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadAdminPanel(container) {
+            container.innerHTML = `
+                <h1>⚙️ Admin Panel</h1>
+                <p style="color: #666; margin-bottom: 30px;">Manage courses, users, and system settings</p>
+
+                <div class="stats-grid" style="margin-bottom: 30px;">
+                    <div class="stat-card">
+                        <div class="stat-number">1,247</div>
+                        <div>Total Users</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #FF6B6B, #FF8E53);">
+                        <div class="stat-number">89</div>
+                        <div>Active Courses</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
+                        <div class="stat-number">94%</div>
+                        <div>Completion Rate</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #A8EDEA, #FED6E3);">
+                        <div class="stat-number" style="color: #333;">156</div>
+                        <div style="color: #333;">Certificates Issued</div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <div style="background: white; padding: 20px; border-radius: 12px;">
+                        <h3>📚 Course Management</h3>
+                        <div style="margin-top: 15px;">
+                            <button class="btn btn-primary" style="margin: 5px; width: 100%;" onclick="createCourse()">
+                                <i class="fas fa-plus"></i> Create New Course
+                            </button>
+                            <button class="btn" style="margin: 5px; width: 100%; background: #f0f0f0;" onclick="manageCourses()">
+                                <i class="fas fa-edit"></i> Manage Existing Courses
+                            </button>
+                            <button class="btn" style="margin: 5px; width: 100%; background: #f0f0f0;" onclick="uploadContent()">
+                                <i class="fas fa-upload"></i> Upload Content
+                            </button>
+                            <button class="btn" style="margin: 5px; width: 100%; background: #f0f0f0;" onclick="designPaths()">
+                                <i class="fas fa-route"></i> Design Learning Paths
+                            </button>
+                        </div>
+                    </div>
+
+                    <div style="background: white; padding: 20px; border-radius: 12px;">
+                        <h3>👥 User Management</h3>
+                        <div style="margin-top: 15px;">
+                            <button class="btn btn-primary" style="margin: 5px; width: 100%;" onclick="addUser()">
+                                <i class="fas fa-user-plus"></i> Add New User
+                            </button>
+                            <button class="btn" style="margin: 5px; width: 100%; background: #f0f0f0;" onclick="bulkImport()">
+                                <i class="fas fa-users"></i> Bulk Import Users
+                            </button>
+                            <button class="btn" style="margin: 5px; width: 100%; background: #f0f0f0;" onclick="manageRoles()">
+                                <i class="fas fa-user-cog"></i> Manage Roles
+                            </button>
+                            <button class="btn" style="margin: 5px; width: 100%; background: #f0f0f0;" onclick="assignTeams()">
+                                <i class="fas fa-sitemap"></i> Assign Teams
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div style="background: white; padding: 20px; border-radius: 12px;">
+                        <h3>📊 Analytics & Reports</h3>
+                        <div style="margin-top: 15px;">
+                            <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin: 10px 0;">
+                                <strong>Team Progress Report</strong>
+                                <div style="font-size: 0.9em; color: #666; margin: 5px 0;">Overall completion: 87%</div>
+                                <button class="btn" style="background: #f0f0f0; font-size: 0.9em; padding: 8px 16px;">View Details</button>
+                            </div>
+
+                            <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin: 10px 0;">
+                                <strong>Engagement Analytics</strong>
+                                <div style="font-size: 0.9em; color: #666; margin: 5px 0;">Daily active users: 342</div>
+                                <button class="btn" style="background: #f0f0f0; font-size: 0.9em; padding: 8px 16px;">View Details</button>
+                            </div>
+
+                            <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin: 10px 0;">
+                                <strong>Compliance Report</strong>
+                                <div style="font-size: 0.9em; color: #666; margin: 5px 0;">Mandatory training: 94% complete</div>
+                                <button class="btn" style="background: #f0f0f0; font-size: 0.9em; padding: 8px 16px;">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; padding: 20px; border-radius: 12px;">
+                        <h3>📢 Communication</h3>
+                        <div style="margin-top: 15px;">
+                            <button class="btn btn-primary" style="margin: 5px; width: 100%;" onclick="sendMessage()">
+                                <i class="fas fa-envelope"></i> Send Message
+                            </button>
+                            <button class="btn" style="margin: 5px; width: 100%; background: #f0f0f0;" onclick="createAnnouncement()">
+                                <i class="fas fa-bullhorn"></i> Create Announcement
+                            </button>
+                            <button class="btn" style="margin: 5px; width: 100%; background: #f0f0f0;" onclick="systemBroadcast()">
+                                <i class="fas fa-broadcast-tower"></i> System Broadcast
+                            </button>
+
+                            <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                                <h4>Recent Messages</h4>
+                                <div style="font-size: 0.9em; color: #666; margin: 10px 0;">
+                                    <strong>Safety Training Reminder</strong><br>
+                                    Sent to 45 users • 2 hours ago
+                                </div>
+                                <div style="font-size: 0.9em; color: #666; margin: 10px 0;">
+                                    <strong>New Course Available</strong><br>
+                                    Sent to all users • 1 day ago
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Additional admin functions
+        function createCourse() {
+            alert('Course Creation Wizard would open here with:\n• Drag-and-drop course builder\n• Multi-format content upload\n• Assessment configuration\n• Learning path design');
+        }
+
+        function manageCourses() {
+            alert('Course Management Panel would show:\n• List of all courses\n• Edit/delete options\n• Enrollment statistics\n• Performance analytics');
+        }
+
+        function uploadContent() {
+            alert('Content Upload Interface would allow:\n• Video files (MP4, AVI, etc.)\n• Audio files (MP3, WAV, etc.)\n• Documents (PDF, Word, PowerPoint)\n• Interactive elements\n• External links');
+        }
+
+        function addUser() {
+            alert('User Creation Form would include:\n• Basic information\n• Role assignment\n• Team assignment\n• Access permissions\n• Welcome email option');
+        }
+
+        function bulkImport() {
+            alert('Bulk Import Tool would allow:\n• CSV file upload\n• User data validation\n• Role assignment\n• Team organization\n• Progress tracking');
+        }
+
+        function enrollCourse(courseId) {
+            alert(`Enrolling in course: ${courseId}. This would add the course to your learning path and send a welcome notification.`);
+        }
+
+        function viewCertificate() {
+            alert('Certificate viewer would display:\n• Official certificate with completion date\n• Digital signature and verification\n• Download options (PDF, PNG)\n• Social sharing capabilities');
+        }
+    </script>
+</body>
+</html>
