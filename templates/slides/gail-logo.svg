@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Red border ellipse -->
+  <ellipse cx="400" cy="300" rx="380" ry="280" fill="#E53E3E" stroke="none"/>
+  
+  <!-- Yellow background ellipse -->
+  <ellipse cx="400" cy="300" rx="360" ry="260" fill="#F6E05E" stroke="none"/>
+  
+  <!-- Hindi text "गेल" at top -->
+  <text x="400" y="120" font-family="Arial, sans-serif" font-size="60" font-weight="bold" text-anchor="middle" fill="#2D3748">गेल</text>
+  
+  <!-- Large "G" -->
+  <path d="M 150 200 Q 150 150 200 150 L 300 150 Q 350 150 350 200 L 350 250 L 300 250 L 300 200 L 200 200 Q 180 200 180 220 L 180 380 Q 180 400 200 400 L 300 400 Q 320 400 320 380 L 320 320 L 280 320 L 280 280 L 350 280 L 350 380 Q 350 430 300 430 L 200 430 Q 150 430 150 380 Z" fill="#2D3748"/>
+  
+  <!-- Red "A" -->
+  <path d="M 380 430 L 420 150 L 460 150 L 500 430 L 470 430 L 465 380 L 415 380 L 410 430 Z M 425 200 L 420 350 L 460 350 L 455 200 Z" fill="#E53E3E"/>
+  
+  <!-- Red "I" -->
+  <rect x="520" y="200" width="40" height="30" fill="#E53E3E"/>
+  <rect x="530" y="230" width="20" height="170" fill="#E53E3E"/>
+  <rect x="520" y="400" width="40" height="30" fill="#E53E3E"/>
+  
+  <!-- Large "L" -->
+  <path d="M 580 150 L 620 150 L 620 400 L 720 400 L 720 430 L 580 430 Z" fill="#2D3748"/>
+  
+  <!-- "GAIL" text at bottom -->
+  <text x="400" y="520" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#2D3748">GAIL</text>
+</svg>

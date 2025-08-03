@@ -1,0 +1,161 @@
+{
+  "name": "templates",
+  "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates",
+  "fileTree": [
+    {
+      "name": "templates",
+      "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates",
+      "type": "directory",
+      "children": [
+        {
+          "name": ".DS_Store",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/.DS_Store",
+          "type": "file"
+        },
+        {
+          "name": ".cursor",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/.cursor",
+          "type": "directory"
+        },
+        {
+          "name": ".git",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/.git",
+          "type": "directory"
+        },
+        {
+          "name": ".gitignore",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/.gitignore",
+          "type": "file"
+        },
+        {
+          "name": ".kapi",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/.kapi",
+          "type": "directory"
+        },
+        {
+          "name": "README.md",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/README.md",
+          "type": "file"
+        },
+        {
+          "name": "analyze_directory.py",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/analyze_directory.py",
+          "type": "file"
+        },
+        {
+          "name": "canva_clone.svg",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/canva_clone.svg",
+          "type": "file"
+        },
+        {
+          "name": "claude_settings.json",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/claude_settings.json",
+          "type": "file"
+        },
+        {
+          "name": "copy_code.py",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/copy_code.py",
+          "type": "file"
+        },
+        {
+          "name": "diagrams",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/diagrams",
+          "type": "directory"
+        },
+        {
+          "name": "fastapi.log",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/fastapi.log",
+          "type": "file"
+        },
+        {
+          "name": "frontend",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/frontend",
+          "type": "directory"
+        },
+        {
+          "name": "mockup1.svg",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/mockup1.svg",
+          "type": "file"
+        },
+        {
+          "name": "project",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/project",
+          "type": "directory",
+          "children": [
+            {
+              "name": "aws-infrastructure-template.md",
+              "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/project/aws-infrastructure-template.md",
+              "type": "file"
+            },
+            {
+              "name": "backend-authentication-template.md",
+              "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/project/backend-authentication-template.md",
+              "type": "file"
+            },
+            {
+              "name": "backwards-build-workflow-template.md",
+              "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/project/backwards-build-workflow-template.md",
+              "type": "file"
+            },
+            {
+              "name": "first_project",
+              "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/project/first_project",
+              "type": "directory"
+            },
+            {
+              "name": "monorepo-template-instructions.md",
+              "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/project/monorepo-template-instructions.md",
+              "type": "file"
+            },
+            {
+              "name": "second_proj",
+              "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/project/second_proj",
+              "type": "directory"
+            },
+            {
+              "name": "test_proj1",
+              "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/project/test_proj1",
+              "type": "directory"
+            }
+          ]
+        },
+        {
+          "name": "run_copy_code.sh",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/run_copy_code.sh",
+          "type": "file"
+        },
+        {
+          "name": "server",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/server",
+          "type": "directory"
+        },
+        {
+          "name": "slides",
+          "path": "/Users/balajiviswanathan/Code/Kapi_biz/templates/slides",
+          "type": "directory"
+        }
+      ]
+    }
+  ],
+  "recentFiles": [],
+  "lastOpenedFiles": {},
+  "panels": {
+    "leftPanelWidth": "300px",
+    "rightPanelWidth": "300px",
+    "bottomPanelHeight": "190px",
+    "leftPanelCollapsed": false,
+    "rightPanelCollapsed": false,
+    "bottomPanelCollapsed": false
+  },
+  "metadata": {
+    "createdAt": "2025-06-01T00:12:21.514Z",
+    "lastModified": "2025-06-16T06:43:04.663Z",
+    "backwardsBuildProgress": 0,
+    "description": ""
+  },
+  "git": {
+    "isGitRepository": false,
+    "repositoryName": null,
+    "currentBranch": null
+  }
+}

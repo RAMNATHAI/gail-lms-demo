@@ -1,0 +1,9 @@
+| Family                  | Deployment         | Primary Use Case                        | Key Examples                                 | Unique Strengths                                                        |
+|-------------------------|-------------------|-----------------------------------------|----------------------------------------------|-------------------------------------------------------------------------|
+| Browser-Based Builders  | Web browser, no install | Rapid prototyping, MVP development      | • Bolt.new• Lovable.dev• Replit Agent• v0.dev (Vercel) | Zero setup, instant deployment, visual editing, accessible anywhere      |
+| Full IDE Replacements   | Desktop app        | Professional development, large projects | • Cursor• Windsurf                       | Deep codebase understanding, native performance, full dev environment    |
+| VS Code Extensions      | IDE plugin         | Enhancing existing workflow             | • Roo Code (Cline)• Augment Code• GitHub Copilot | Seamless integration, familiar environment, customizable                 |
+| Smart Autocomplete      | IDE plugin/API     | Code completion, speed coding           | • Supermaven• Cody (Sourcegraph)• Tabnine | Lightning-fast suggestions, large context windows, learns coding style   |
+| Cloud Coding Agents     | Cloud-based        | Async tasks, complex operations         | • Jules (Google)• OpenAI Codex• Amazon Q Developer | Parallel task execution, no local resources needed, enterprise scale     |
+| Terminal/CLI Tools      | Command line       | Git workflows, file operations          | • Aider• Claude Code (CLI)• Codex CLI | Scriptable, lightweight, version control friendly                        |
+| Standalone Environments | Web/Desktop app    | Specialized workflows                   | • Solar (Try.Solar)• Manus AI• Devin  | Domain-specific features, collaborative canvas, autonomous capabilities  |

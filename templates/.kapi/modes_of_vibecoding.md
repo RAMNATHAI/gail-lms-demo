@@ -1,0 +1,8 @@
+| Mode & Name                        | What It's For                                                                                      | Key Mindset                              |
+|-------------------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------|
+| Blueprint Architect                | Designing systems, APIs, and data flows before writing any code. Creating diagrams, decision docs, and technical specs. | Structure over syntax; think like an architect |
+| Zero-to-Hero Greenfield            | Building MVPs from mockups to production. For PMs creating prototypes and developers building full apps. | Move fast but build solid foundations    |
+| Code Detective Archaeology          | Debugging, reviewing, and understanding existing codebases. Finding bugs, security issues, and improvement opportunities. | Investigate first, change second         |
+| Precision Surgery                  | Making targeted improvements to live products. Feature additions, optimizations, and careful refactoring. | Minimal invasion, maximum impact         |
+| Phoenix Rebuilder                  | Migrating legacy systems, modernizing tech stacks, and knowledge transfer. Transforming old into new while preserving business logic. | Honor the past, embrace the future       |
+| Ship-It DevOps                     | Building deployment scripts, CI/CD pipelines, monitoring, and infrastructure as code. Automating everything from dev to production. | Automate everything, trust nothing       |

@@ -1,0 +1,30 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:\\Users\\ADMIN\\Desktop\\VIBE_CODING_JULY\\templates\\project\\PROJECT_TEST"
+        
+      ]
+    }
+  }
+}
+
+Example: 
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/balajiviswanathan/Code/KAPI/",
+        "/Users/balajiviswanathan/Code/kapi-fresh/",
+        "/Users/balajiviswanathan/Code/Kapi_biz/templates/",
+        "/Users/balajiviswanathan/Code/experimental"
+      ]
+    }
+  }
+}

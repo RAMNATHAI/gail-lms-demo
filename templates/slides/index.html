@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Enhanced LMS - Revolutionary Learning Management System for the Future</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+
+  <!-- Check for print-pdf mode and load the appropriate print styles -->
+  <script>
+    // Determine if the print-pdf query parameter is present
+    var isPrintPDF = window.location.search.match(/print-pdf/gi);
+
+    // Keep the black theme for both modes but add PDF styles when needed
+    document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/black.css" id="theme">');
+
+    // Add PDF-specific styles if in print mode
+    if (isPrintPDF) {
+      document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/css/print/pdf.css">');
+    }
+  </script>
+
+  <style>
+    /* Custom styles */
+    .reveal {
+      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+      font-size: 30px;
+      color: #f0f0f0;
+      background-color: #1a1a2e;
+    }
+
+    html, body {
+      background: linear-gradient(135deg, #1a1a2e 0%, #232344 100%);
+    }
+
+    .reveal h1,
+    .reveal h2,
+    .reveal h3,
+    .reveal h4 {
+      font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+      color: #4f46e5;  /* Modern education purple */
+      text-transform: none;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .reveal h1 {
+      font-size: 2.3em;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .reveal h2 {
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .reveal h3 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #06b6d4;
+      line-height: 1.4;
+    }
+
+    .reveal ul {
+      display: block;
+      margin-left: 2em;
+    }
+
+    .reveal li {
+      margin: 0.6em 0;
+      line-height: 1.5;
+      font-size: 0.92em;
+      font-weight: 300;
+    }
+
+    .reveal a {
+      color: #4f46e5;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .reveal a:hover {
+      color: #6366f1;
+      text-shadow: none;
+      border: none;
+    }
+
+    .highlight-box {
+      background-color: rgba(79, 70, 229, 0.1);
+      border-left: 4px solid #4f46e5;
+      padding: 12px 20px;
+      margin: 15px auto;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.92em;
+      font-weight: 300;
+      line-height: 1.5;
+      max-width: 1000px;
+      width: 80%;
+      text-align: center;
+    }
+
+
+
+    /* Title slide specific styling */
+    .title-slide {
+      display: flex !important;
+      flex-direction: column; /* Stack elements vertically */
+      justify-content: center !important;
+      align-items: center !important;
+      height: 100vh !important;
+      margin-top: 0 !important;
+      text-align: center;
+    }
+
+
+
+    /* Two column layout */
+    .two-columns {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      margin-top: 15px;
+    }
+
+    .column {
+      flex: 1;
+      padding: 0 10px;
+    }
+
+    /* Table styling */
+    table {
+      width: 80%;
+      max-width: 1000px;
+      margin: 15px auto;
+      border-collapse: collapse;
+      font-size: 0.75em;
+      background-color: rgba(26, 26, 46, 0.6);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 15px; /* Increased padding */
+      text-align: left;
+      border-bottom: 1px solid #363658;
+    }
+
+    th {
+      background-color: rgba(79, 70, 229, 0.15);
+      font-weight: 600;
+      color: #06b6d4;
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    tr.highlight-row {
+      background-color: rgba(79, 70, 229, 0.15);
+    }
+
+    tr.highlight-row td {
+      border-bottom: 1px solid #4f46e5;
+    }
+
+    /* Success story boxes */
+    .success-story {
+      background-color: rgba(79, 70, 229, 0.1);
+      border-left: 4px solid #4f46e5;
+      border-radius: 0 4px 4px 0;
+      padding: 12px 20px;
+      margin: 15px auto;
+      font-size: 0.85em;
+      max-width: 1000px;
+      width: 80%;
+    }
+
+    .success-story h3 {
+      margin-top: 0;
+      color: #4f46e5;
+    }
+
+    /* Fragment animations */
+    .fragment.highlight-current-blue {
+      opacity: 1;
+      visibility: inherit;
+    }
+
+    .fragment.highlight-current-blue.current-fragment {
+      color: #4f46e5;
+      font-weight: bold;
+    }
+
+    /* Trial progress indicator */
+    .trial-progress {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      max-width: 1000px;
+      margin: 30px auto;
+      position: relative;
+    }
+
+    .trial-progress:before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: rgba(255, 255, 255, 0.2);
+      z-index: 1;
+    }
+
+    .trial-stage {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      width: 150px;
+    }
+
+    .stage-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #232344;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .stage-dot.completed {
+      background-color: #5bc2e7;
+      border-color: #8ed8f8;
+    }
+
+    .stage-dot.active {
+      background-color: rgba(91, 194, 231, 0.3);
+      border-color: #5bc2e7;
+    }
+
+    .stage-label {
+      font-size: 0.8em;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .stage-label.completed, .stage-label.active {
+      color: #f0f0f0;
+      font-weight: 600;
+    }
+
+    /* Benefits grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* More responsive */
+      gap: 20px;
+      max-width: 1000px;
+      margin: 30px auto;
+      width: 80%;
+    }
+
+    .benefit-card {
+      background-color: rgba(26, 26, 46, 0.6);
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid rgba(79, 70, 229, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      border-color: rgba(79, 70, 229, 0.5);
+    }
+
+    .benefit-card h3 {
+      margin-top: 0;
+      font-size: 1.1em;
+      text-align: center;
+    }
+
+    .benefit-card p {
+      font-size: 0.8em;
+      line-height: 1.5;
+    }
+
+    /* PDF & Fullscreen button styles */
+    .custom-action-btn {
+      position: fixed;
+      z-index: 50;
+      bottom: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(79, 70, 229, 0.85);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 2px 10px rgba(79, 70, 229, 0.3);
+      cursor: pointer;
+      margin-left: 8px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .custom-action-btn:hover {
+      background: rgba(79, 70, 229, 1);
+      transform: scale(1.07);
+    }
+  </style>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="reveal">
+
+
+    <div class="slides">
+      <!-- Title Slide -->
+      <section id="title-slide" class="title-slide">
+        <h1>AI-Enhanced LMS</h1>
+        <h3 style="margin-bottom: 40px; color: #06b6d4;">AI Powered LMS: Empowering Smarter Learning</h3>
+        <p style="font-size: 0.8em; opacity: 0.8;">Product Presentation</p>
+      </section>
+
+      <!-- Corporate Learning Excellence -->
+      <section>
+        <h2>Advancing Corporate Learning Excellence</h2>
+        <div class="highlight-box">
+          <p><strong>Empowering employees with next-generation learning technology for professional growth</strong></p>
+        </div>
+        <div style="text-align: left; width: 80%; margin: 0 auto;">
+          <p class="fragment highlight-current-blue">Personalized development paths aligned with individual career goals and organizational needs</p>
+          <p class="fragment highlight-current-blue">Enhanced employee engagement through interactive and adaptive learning experiences</p>
+          <p class="fragment highlight-current-blue">Continuous skills advancement for professional growth and industry expertise</p>
+          <p class="fragment highlight-current-blue">Data-driven insights to optimize learning outcomes and workforce productivity</p>
+        </div>
+      </section>
+
+      <!-- Our Solution -->
+      <section>
+        <h2>Our Solution: AI-Enhanced LMS</h2>
+        <div class="highlight-box">
+          <p><strong>An intelligent learning platform that adapts to each learner's needs and preferences</strong></p>
+        </div>
+        <p>Interactive video learning, AI-powered assessments, and personalized learning paths in one comprehensive platform</p>
+        <p class="fragment highlight-current-blue">User-centric design for learners and educators</p>
+        <p class="fragment highlight-current-blue">Seamless integration with existing educational workflows</p>
+      </section>
+
+      <!-- Key Features -->
+      <section>
+        <h2>Core Features</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <h3>📚 Multi-Format Content</h3>
+            <p>Videos, audio, PDFs, documents, and links with configurable assessments and completion validation</p>
+          </div>
+          <div class="benefit-card">
+            <h3>🤖 AI-Powered Assessments</h3>
+            <p>Intelligent quizzes that adapt to learner performance with instant feedback and explanations</p>
+          </div>
+          <div class="benefit-card">
+            <h3>📊 Real-Time Analytics</h3>
+            <p>Captures every learning event, tracks performance, and displays top learners with smart badges</p>
+          </div>
+          <div class="benefit-card">
+            <h3>🤖 AI Learning Chatbot</h3>
+            <p>24/7 intelligent virtual assistant for instant help, content explanations, and learning guidance</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Multi-Format Content & Assessment Feature -->
+      <section>
+        <h2>📚 Multi-Format Content & Configurable Assessments</h2>
+        <div class="highlight-box">
+          <p><strong>Comprehensive learning materials with flexible assessment configurations</strong></p>
+        </div>
+        <div style="text-align: left; width: 80%; margin: 0 auto;">
+          <p class="fragment highlight-current-blue">🎥 <strong>Multi-Format Support:</strong> Videos, audio, PDFs, Word docs, PPTs, and reference links in unified courses</p>
+          <p class="fragment highlight-current-blue">✅ <strong>Complete Validation:</strong> Course completion requires finishing ALL study materials and assessments</p>
+          <p class="fragment highlight-current-blue">⚙️ <strong>Configurable Assessments:</strong> Customizable quizzes, matching exercises, and various assessment forms</p>
+          <p class="fragment highlight-current-blue">🔄 <strong>Integrated Learning:</strong> Content formats work together or independently based on course design</p>
+        </div>
+      </section>
+
+
+
+
+
+      <!-- AI-Powered Configurable Assessments Feature -->
+      <section>
+        <h2>🤖 Configurable AI-Powered Assessments</h2>
+        <div class="highlight-box">
+          <p><strong>Flexible assessment system with multiple formats and mandatory completion validation</strong></p>
+        </div>
+        <div style="text-align: left; width: 80%; margin: 0 auto;">
+          <p class="fragment highlight-current-blue">⚙️ <strong>Assessment Variety:</strong> Configurable quizzes, matching exercises, drag-drop, and custom assessment forms</p>
+          <p class="fragment highlight-current-blue">✅ <strong>Completion Validation:</strong> Course completion only after ALL materials and assessments are finished</p>
+          <p class="fragment highlight-current-blue">🧠 <strong>Adaptive Intelligence:</strong> AI adjusts difficulty and provides instant feedback based on performance</p>
+          <p class="fragment highlight-current-blue">� <strong>Comprehensive Tracking:</strong> Every assessment attempt and result captured for detailed analytics</p>
+        </div>
+      </section>
+
+      <!-- Progress Analytics Feature -->
+      <section>
+        <h2>📊 Real-Time Analytics & Event Tracking</h2>
+        <div class="highlight-box">
+          <p><strong>Comprehensive real-time analytics capturing every learning event and interaction</strong></p>
+        </div>
+        <div style="text-align: left; width: 80%; margin: 0 auto;">
+          <p class="fragment highlight-current-blue">⚡ <strong>Event Tracking:</strong> Captures course start/end, quiz attempts, right/wrong answers, and completion times</p>
+          <p class="fragment highlight-current-blue">� <strong>Smart Badges & Certificates:</strong> Automatic awards based on completion time, accuracy, and performance metrics</p>
+          <p class="fragment highlight-current-blue">🥇 <strong>Leaderboards:</strong> Top learners displayed for daily, weekly, and monthly achievements</p>
+          <p class="fragment highlight-current-blue">� <strong>Individual Analytics:</strong> Detailed personal dashboards with learning patterns and progress insights</p>
+        </div>
+      </section>
+
+      <!-- Personalized Learning Paths Feature -->
+      <section>
+        <h2>🎯 Personalized Learning Paths</h2>
+        <div class="highlight-box">
+          <p><strong>AI-driven recommendations that create customized learning journeys for each individual</strong></p>
+        </div>
+        <div style="text-align: left; width: 80%; margin: 0 auto;">
+          <p class="fragment highlight-current-blue">🤖 <strong>Smart Recommendations:</strong> AI analyzes learning patterns to suggest relevant courses</p>
+          <p class="fragment highlight-current-blue">🎨 <strong>Learning Styles:</strong> Adapts content delivery based on visual, auditory, or kinesthetic preferences</p>
+          <p class="fragment highlight-current-blue">⏰ <strong>Flexible Pacing:</strong> Self-paced learning with intelligent scheduling suggestions</p>
+          <p class="fragment highlight-current-blue">🎓 <strong>Career Alignment:</strong> Learning paths aligned with professional goals and industry requirements</p>
+        </div>
+      </section>
+
+      <!-- Social Learning Hub Feature -->
+      <section>
+        <h2>👥 Social Learning Hub</h2>
+        <div class="highlight-box">
+          <p><strong>Collaborative learning environment that connects learners and fosters knowledge sharing</strong></p>
+        </div>
+        <div style="text-align: left; width: 80%; margin: 0 auto;">
+          <p class="fragment highlight-current-blue">💬 <strong>Discussion Forums:</strong> Course-specific discussions and peer-to-peer learning</p>
+          <p class="fragment highlight-current-blue">👨‍🏫 <strong>Expert Mentorship:</strong> Connect with industry experts and experienced learners</p>
+          <p class="fragment highlight-current-blue">🤝 <strong>Study Groups:</strong> Form collaborative learning groups with shared goals</p>
+          <p class="fragment highlight-current-blue">🌟 <strong>Peer Reviews:</strong> Learn from others through project reviews and feedback</p>
+        </div>
+      </section>
+
+      <!-- AI Chatbot Feature -->
+      <section>
+        <h2>🤖 AI-Powered Learning Chatbot</h2>
+        <div class="highlight-box">
+          <p><strong>Intelligent virtual assistant that knows everything about the learning platform and course details</strong></p>
+        </div>
+        <div style="text-align: left; width: 80%; margin: 0 auto;">
+          <p class="fragment highlight-current-blue">🎓 <strong>Platform Features Guide:</strong> Explains all LMS features, tools, and functionalities in detail</p>
+          <p class="fragment highlight-current-blue">📚 <strong>Course Information:</strong> Provides comprehensive details about courses, modules, and learning objectives</p>
+          <p class="fragment highlight-current-blue">🔍 <strong>Feature Discovery:</strong> Helps users discover and utilize all available platform capabilities</p>
+          <p class="fragment highlight-current-blue">� <strong>24/7 Support:</strong> Instant answers about platform usage, course content, and learning progress</p>
+        </div>
+      </section>
+
+      <!-- Admin User Management Feature -->
+      <section>
+        <h2>👨‍💼 Admin User Management System</h2>
+        <div class="highlight-box">
+          <p><strong>Comprehensive administrative control for course creation, user management, and communication</strong></p>
+        </div>
+        <div style="text-align: left; width: 80%; margin: 0 auto;">
+          <p class="fragment highlight-current-blue">📚 <strong>Course & Module Creation:</strong> Create, edit, and organize courses with modules, lessons, and assessments</p>
+          <p class="fragment highlight-current-blue">🛤️ <strong>Custom Learning Paths:</strong> Design personalized learning journeys and customize course sequences</p>
+          <p class="fragment highlight-current-blue">⚡ <strong>Mandatory & Optional Courses:</strong> Assign required courses and suggest optional learning materials</p>
+          <p class="fragment highlight-current-blue">📢 <strong>Message Broadcasting:</strong> Send announcements to individuals, groups, or all users instantly</p>
+        </div>
+      </section>
+
+
+
+
+
+      <!-- Team Management Feature -->
+      <section>
+        <h2>👥 Team & Collaboration Management</h2>
+        <div class="highlight-box">
+          <p><strong>Comprehensive team management tools for organizations and educational institutions</strong></p>
+        </div>
+        <div style="text-align: left; width: 80%; margin: 0 auto;">
+          <p class="fragment highlight-current-blue">👨‍💼 <strong>Role-Based Access:</strong> Admin, instructor, and learner roles with customizable permissions</p>
+          <p class="fragment highlight-current-blue">📊 <strong>Team Analytics:</strong> Track team progress, completion rates, and performance metrics</p>
+          <p class="fragment highlight-current-blue">🎯 <strong>Group Assignments:</strong> Create team-based learning activities and collaborative projects</p>
+          <p class="fragment highlight-current-blue">📋 <strong>Bulk Management:</strong> Efficiently manage large groups of learners and course assignments</p>
+        </div>
+      </section>
+      <!-- Final Slide -->
+      <section class="final-slide">
+        <h1 style="font-size: 3.5em; margin-bottom: 40px; background: linear-gradient(45deg, #4f46e5, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Thank You</h1>
+        <div class="highlight-box" style="margin-bottom: 40px;">
+          <p style="font-size: 1.2em;"><strong>AI-Enhanced LMS: Empowering Smarter Learning</strong></p>
+        </div>
+        <p style="font-size: 1.1em; opacity: 0.9; margin-top: 30px;">🚀 Ready to revolutionize your learning experience?</p>
+        <p style="font-size: 0.9em; opacity: 0.7; margin-top: 20px;">Experience the future of education today</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/markdown/markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/highlight.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/zoom/zoom.js"></script> <!-- Added Zoom plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/search/search.js"></script> <!-- Added Search plugin -->
+
+  <script>
+    // Initialize Reveal.js
+    let deck = new Reveal({
+      hash: true,
+      slideNumber: 'c/t', // Current slide / Total slides
+      transition: 'slide',
+      transitionSpeed: 'fast',
+      controls: true,
+      progress: true,
+      center: true,
+      width: 1400,
+      height: 900,
+      margin: 0.04, // Slight margin around slides
+      viewDistance: 3,
+      showNotes: false, // Set to true if you have speaker notes
+      backgroundTransition: 'fade',
+      controlsLayout: 'bottom-right',
+      controlsBackArrows: 'faded',
+      // Configure Fragments
+      fragments: true,
+      fragmentInURL: true,
+      // PDF export options
+      pdfMaxPagesPerSlide: 1,
+      pdfSeparateFragments: false,
+      pdfPageHeightOffset: -1, // Adjust if content gets cut off in PDF
+      // Add plugins
+      plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom, RevealSearch ]
+    });
+
+    // Initialize the presentation
+    deck.initialize();
+
+    // --- PDF Export Button with Icon ---
+    const pdfButton = document.createElement('div');
+    pdfButton.className = 'custom-action-btn';
+    pdfButton.title = 'Export to PDF (Use Browser Print: Ctrl+P)';
+    pdfButton.style.right = '170px';
+    pdfButton.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="2" width="16" height="20" rx="2" fill="#fff" stroke="#1a1a2e" stroke-width="2"/><path d="M8 6h8M8 10h8M8 14h4" stroke="#1a1a2e" stroke-width="2" stroke-linecap="round"/></svg>`;
+    pdfButton.addEventListener('click', function() {
+      const currentUrl = window.location.href.split('?')[0];
+      window.open(currentUrl + '?print-pdf', '_blank');
+      setTimeout(() => {
+        alert("Presentation opened in PDF mode in a new tab. Use your browser's Print function (Ctrl+P or Cmd+P) and select 'Save as PDF'.");
+      }, 500);
+    });
+
+    // --- Fullscreen Button ---
+    const fullscreenButton = document.createElement('div');
+    fullscreenButton.className = 'custom-action-btn';
+    fullscreenButton.title = 'Toggle Fullscreen';
+    fullscreenButton.style.right = '120px';
+    fullscreenButton.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h6M4 4v6M4 20h6M4 20v-6M20 4h-6M20 4v6M20 20h-6M20 20v-6" stroke="#1a1a2e" stroke-width="2" stroke-linecap="round"/></svg>`;
+    fullscreenButton.addEventListener('click', function() {
+      const elem = document.documentElement;
+      if (!document.fullscreenElement) {
+        if (elem.requestFullscreen) elem.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    });
+
+    // Only add the buttons if not already in print mode
+    if (!isPrintPDF) {
+      document.body.appendChild(pdfButton);
+      document.body.appendChild(fullscreenButton);
+    }
+
+  </script>
+</body>
+</html>

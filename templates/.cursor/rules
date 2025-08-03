@@ -1,0 +1,44 @@
+# Cursor Rules & Best Practices
+
+## 1. Project Setup
+- Open your entire project folder in Cursor for best context awareness.
+- Use the built-in terminal for all shell commands to keep context in one place.
+
+## 2. AI Coding Assistance
+- Leverage Cursor's AI features for code generation, refactoring, and documentation.
+- Use inline suggestions for quick fixes, but review all AI-generated code before committing.
+- For larger changes, use the "Ask AI" or "Explain" features to understand code before editing.
+
+## 3. Navigation & Search
+- Use the global search (Cmd+P or Ctrl+P) to quickly jump to files, symbols, or definitions.
+- Use semantic search to find code by intent, not just by keyword.
+
+## 4. Version Control
+- Integrate your Git workflow directly in Cursor.
+- Use the built-in diff viewer to review changes before staging/committing.
+
+## 5. Customization
+- Adjust themes, keybindings, and extensions to match your workflow.
+- Use snippets and custom commands for repetitive tasks.
+
+## 6. Performance
+- For large projects, use the "Indexing" status to ensure all files are searchable.
+- Close unused tabs and panels to keep the IDE responsive.
+
+## 7. Collaboration
+- Use Cursor's live share or collaboration features for pair programming or code reviews.
+- Share context (like terminal output or code selections) during collaborative sessions.
+
+## 8. Troubleshooting
+- Use the Problems panel to quickly identify and fix linter or build errors.
+- If AI suggestions are off, provide more context or select a larger code region.
+
+## 9. Security & Privacy
+- Review AI privacy settings, especially when working with sensitive code.
+- Avoid sharing API keys or secrets in prompts or code suggestions.
+
+## 10. Code Quality
+- Keep code files concise—preferably less than 500 lines of code per file for maintainability.
+- Use strong typing wherever possible to catch errors early and improve code clarity.
+- Enforce linting and formatting rules to maintain a consistent code style across the project.
+- Regularly review and refactor code to reduce complexity and improve readability. 
